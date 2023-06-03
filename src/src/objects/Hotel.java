@@ -17,24 +17,40 @@ Método adicionarComodidade() para adicionar comodidades ao hotel.
      */
 
     private String nome;
-
     private String endereco;
 
+    private int numeroQuartos;
     private int quartosDisponiveis;
-
     private String[] comodidades;
 
-    public Hotel(String nome, String endereco, int quartosDisponiveis, String[] comodidades) {
+    private static int numeroTotalHoteis;
+
+    public Hotel() {
+        numeroTotalHoteis++;
+    }
+
+    public Hotel(String nome, String endereco, int numeroQuartos, String[] comodidades) {
         this.nome = nome;
         this.endereco = endereco;
-        this.quartosDisponiveis = quartosDisponiveis;
+        this.numeroQuartos = numeroQuartos;
         this.comodidades = comodidades;
+        this.quartosDisponiveis = this.numeroQuartos;
+        numeroTotalHoteis++;
+    }
+
+    public Hotel(Hotel outroHotel) {
+        this.nome = outroHotel.nome;
+        this.endereco = outroHotel.endereco;
+        this.numeroQuartos = outroHotel.numeroQuartos;
+        this.quartosDisponiveis = outroHotel.quartosDisponiveis;
+        this.comodidades = outroHotel.comodidades;
+        numeroTotalHoteis++;
     }
 
     public void print() {
         System.out.println("Hotel: " + getNome());
         System.out.println("Endereço: " + getEndereco());
-        System.out.println("Número de Quartos: " + getQuartosDisponiveis());
+        System.out.println("Número de quartos disponiveis: " + getQuartosDisponiveis() + " de "+getNumeroQuartos()+" totais.");
         System.out.println("Comodidades: ");
         for (int i = 0; i < getComodidades().length; i++){
             System.out.println(getComodidades()[i]);
@@ -43,25 +59,15 @@ Método adicionarComodidade() para adicionar comodidades ao hotel.
     }
 
     @Override
-    public String toString() {
-        return "Hotel{" +
-                "nome='" + nome + '\'' +
-                ", endereco='" + endereco + '\'' +
-                ", quartosDisponiveis=" + quartosDisponiveis +
-                ", comodidades=" + Arrays.toString(comodidades) +
-                '}';
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Hotel hotel)) return false;
-        return getQuartosDisponiveis() == hotel.getQuartosDisponiveis() && Objects.equals(getNome(), hotel.getNome()) && Objects.equals(getEndereco(), hotel.getEndereco()) && Arrays.equals(getComodidades(), hotel.getComodidades());
+        return getNumeroQuartos() == hotel.getNumeroQuartos() && getNome().equals(hotel.getNome()) && getEndereco().equals(hotel.getEndereco()) && Arrays.equals(getComodidades(), hotel.getComodidades());
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(getNome(), getEndereco(), getQuartosDisponiveis());
+        int result = Objects.hash(getNome(), getEndereco(), getNumeroQuartos());
         result = 31 * result + Arrays.hashCode(getComodidades());
         return result;
     }
@@ -96,5 +102,21 @@ Método adicionarComodidade() para adicionar comodidades ao hotel.
 
     public void setComodidades(String[] comodidades) {
         this.comodidades = comodidades;
+    }
+
+    public int getNumeroQuartos() {
+        return numeroQuartos;
+    }
+
+    public void setNumeroQuartos(int numeroQuartos) {
+        this.numeroQuartos = numeroQuartos;
+    }
+
+    public static int getNumeroTotalHoteis() {
+        return numeroTotalHoteis;
+    }
+
+    public static void setNumeroTotalHoteis(int numeroTotalHoteis) {
+        Hotel.numeroTotalHoteis = numeroTotalHoteis;
     }
 }
