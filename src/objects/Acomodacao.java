@@ -1,5 +1,6 @@
 package objects;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 public class Acomodacao {
@@ -11,14 +12,23 @@ public class Acomodacao {
      */
 
     private String nome;
-
     private String endereco;
-
     private int classificacao;
-
     private double precoNoite;
-
     private String descricao;
+    private String[] comodidades;
+
+
+    public Acomodacao(String nome, String endereco, int classificacao, double precoNoite, String descricao) {
+        String[] comodidade = new String[0];
+        this.nome = nome;
+        this.endereco = endereco;
+        this.classificacao = classificacao;
+        this.precoNoite = precoNoite;
+        this.descricao = descricao;
+        this.comodidades = comodidade;
+
+    }
 
     public void print() {
         System.out.println("Nome: " + nome);
@@ -26,6 +36,11 @@ public class Acomodacao {
         System.out.println("Classificação: " + classificacao);
         System.out.println("Preço: " + precoNoite);
         System.out.println("Descrição: " + descricao);
+        System.out.println("Comodidades: ");
+        for(int i = 0; i < getComodidades().length; i++){
+            System.out.print(getComodidades()[i]);
+            System.out.println(" ");
+        }
     }
 
     @Override
@@ -33,12 +48,14 @@ public class Acomodacao {
         if (this == o) return true;
         if (!(o instanceof Acomodacao)) return false;
         Acomodacao that = (Acomodacao) o;
-        return getClassificacao() == that.getClassificacao() && Double.compare(that.getPrecoNoite(), getPrecoNoite()) == 0 && Objects.equals(getNome(), that.getNome()) && Objects.equals(getEndereco(), that.getEndereco()) && Objects.equals(getDescricao(), that.getDescricao());
+        return getClassificacao() == that.getClassificacao() && Double.compare(that.getPrecoNoite(), getPrecoNoite()) == 0 && Objects.equals(getNome(), that.getNome()) && Objects.equals(getEndereco(), that.getEndereco()) && Objects.equals(getDescricao(), that.getDescricao()) && Arrays.equals(getComodidades(), that.getComodidades());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getNome(), getEndereco(), getClassificacao(), getPrecoNoite(), getDescricao());
+        int result = Objects.hash(getNome(), getEndereco(), getClassificacao(), getPrecoNoite(), getDescricao());
+        result = 31 * result + Arrays.hashCode(getComodidades());
+        return result;
     }
 
     @Override
@@ -49,6 +66,7 @@ public class Acomodacao {
                 ", classificacao=" + classificacao +
                 ", precoNoite=" + precoNoite +
                 ", descricao='" + descricao + '\'' +
+                ", comodidades=" + Arrays.toString(comodidades) +
                 '}';
     }
 
@@ -90,5 +108,13 @@ public class Acomodacao {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public String[] getComodidades() {
+        return comodidades;
+    }
+
+    public void setComodidades(String[] comodidades) {
+        this.comodidades = comodidades;
     }
 }
