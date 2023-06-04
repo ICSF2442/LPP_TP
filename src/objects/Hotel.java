@@ -1,13 +1,12 @@
 package objects;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class Hotel {
+public class Hotel extends Acomodacao{
 
     /*
-    Atributos protegidos: nome, endereço, número de quartos disponíveis, lista de comodidades (piscina, academia, restaurante, etc.).
+    Atributos protegidos: número de quartos disponíveis, lista de comodidades (piscina, academia, restaurante, etc.).
 Atributos de classe: lista de hotéis disponíveis (pode ser um ArrayList ou outra estrutura de dados semelhante).
 Construtores: com e sem parâmetros, para definir os atributos da classe.
 Métodos de acesso específicos: getters e setters para os atributos.
@@ -16,22 +15,17 @@ Método print() para imprimir os atributos.
 Método adicionarComodidade() para adicionar comodidades ao hotel.
      */
 
-    private String nome;
-    private String endereco;
-
     private int numeroQuartos;
     private int quartosDisponiveis;
     private String[] comodidades;
-
     private static int numeroTotalHoteis;
 
     public Hotel() {
         numeroTotalHoteis++;
     }
 
-    public Hotel(String nome, String endereco, int numeroQuartos, String[] comodidades) {
-        this.nome = nome;
-        this.endereco = endereco;
+    public Hotel(int numeroQuartos, String[] comodidades) {
+        super();
         this.numeroQuartos = numeroQuartos;
         this.comodidades = comodidades;
         this.quartosDisponiveis = this.numeroQuartos;
@@ -39,8 +33,7 @@ Método adicionarComodidade() para adicionar comodidades ao hotel.
     }
 
     public Hotel(Hotel outroHotel) {
-        this.nome = outroHotel.nome;
-        this.endereco = outroHotel.endereco;
+        super();
         this.numeroQuartos = outroHotel.numeroQuartos;
         this.quartosDisponiveis = outroHotel.quartosDisponiveis;
         this.comodidades = outroHotel.comodidades;
@@ -48,8 +41,7 @@ Método adicionarComodidade() para adicionar comodidades ao hotel.
     }
 
     public void print() {
-        System.out.println("Hotel: " + getNome());
-        System.out.println("Endereço: " + getEndereco());
+        super.print();
         System.out.println("Número de quartos disponiveis: " + getQuartosDisponiveis() + " de "+getNumeroQuartos()+" totais.");
         System.out.println("Comodidades: ");
         for (int i = 0; i < getComodidades().length; i++){
@@ -61,31 +53,26 @@ Método adicionarComodidade() para adicionar comodidades ao hotel.
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Hotel hotel)) return false;
-        return getNumeroQuartos() == hotel.getNumeroQuartos() && getNome().equals(hotel.getNome()) && getEndereco().equals(hotel.getEndereco()) && Arrays.equals(getComodidades(), hotel.getComodidades());
+        if (!(o instanceof Hotel)) return false;
+        if (!super.equals(o)) return false;
+        Hotel hotel = (Hotel) o;
+        return getNumeroQuartos() == hotel.getNumeroQuartos() && getQuartosDisponiveis() == hotel.getQuartosDisponiveis() && Arrays.equals(getComodidades(), hotel.getComodidades());
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(getNome(), getEndereco(), getNumeroQuartos());
+        int result = Objects.hash(super.hashCode(), getNumeroQuartos(), getQuartosDisponiveis());
         result = 31 * result + Arrays.hashCode(getComodidades());
         return result;
     }
 
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
+    @Override
+    public String toString() {
+        return "Hotel{" +
+                "numeroQuartos=" + numeroQuartos +
+                ", quartosDisponiveis=" + quartosDisponiveis +
+                ", comodidades=" + Arrays.toString(comodidades) +
+                '}';
     }
 
     public int getQuartosDisponiveis() {
