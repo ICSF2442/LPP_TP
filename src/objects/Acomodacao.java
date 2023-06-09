@@ -30,6 +30,15 @@ public class Acomodacao {
 
     }
 
+    public Acomodacao(Acomodacao acomodacao) {
+        this.nome = acomodacao.getNome();
+        this.endereco = acomodacao.getEndereco();
+        this.classificacao = acomodacao.getClassificacao();
+        this.precoNoite = acomodacao.getPrecoNoite();
+        this.descricao = acomodacao.getDescricao();
+        this.comodidades = acomodacao.getComodidades();
+    }
+
     public void print() {
         System.out.println("Nome: " + nome);
         System.out.println("Endereço: " + endereco);

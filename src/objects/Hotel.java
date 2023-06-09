@@ -20,18 +20,20 @@ Método adicionarComodidade() para adicionar comodidades ao hotel.
     private static int numeroTotalHoteis;
     private int numeroEstrelas;
 
-    public Hotel() {
+    public Hotel(Acomodacao acomodacao) { super(acomodacao);
         numeroTotalHoteis++;
     }
 
-    public Hotel(int numeroQuartos, int quartosDisponiveis, String[] comodidades, int numeroEstrelas) {
+    public Hotel(Acomodacao acomodacao, int numeroQuartos, int quartosDisponiveis, String[] comodidades, int numeroEstrelas) {
+        super(acomodacao);
         this.numeroQuartos = numeroQuartos;
         this.quartosDisponiveis = quartosDisponiveis;
         this.numeroEstrelas = numeroEstrelas;
+        numeroTotalHoteis++;
     }
 
-    public Hotel(Hotel outroHotel) {
-        super();
+    public Hotel(Acomodacao acomodacao, Hotel outroHotel) {
+        super(acomodacao);
         this.numeroQuartos = outroHotel.numeroQuartos;
         this.quartosDisponiveis = outroHotel.quartosDisponiveis;
         this.numeroEstrelas = outroHotel.numeroEstrelas;
