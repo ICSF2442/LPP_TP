@@ -1,4 +1,3 @@
-// ameno
 
 public class main {
 

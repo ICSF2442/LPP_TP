@@ -1,9 +1,11 @@
 package objects;
 
+import interfaces.slogan;
+
 import java.util.Arrays;
 import java.util.Objects;
 
-public class Hotel extends Acomodacao{
+public class Hotel extends Acomodacao implements slogan {
 
     /*
     Atributos protegidos: número de quartos disponíveis, lista de comodidades (piscina, academia, restaurante, etc.).
@@ -20,11 +22,16 @@ Método adicionarComodidade() para adicionar comodidades ao hotel.
     private static int numeroTotalHoteis;
     private int numeroEstrelas;
 
+
+    public Hotel(){
+        super();
+        numeroTotalHoteis++;
+    }
     public Hotel(Acomodacao acomodacao) { super(acomodacao);
         numeroTotalHoteis++;
     }
 
-    public Hotel(Acomodacao acomodacao, int numeroQuartos, int quartosDisponiveis, String[] comodidades, int numeroEstrelas) {
+    public Hotel(Acomodacao acomodacao, int numeroQuartos, int quartosDisponiveis, int numeroEstrelas) {
         super(acomodacao);
         this.numeroQuartos = numeroQuartos;
         this.quartosDisponiveis = quartosDisponiveis;
@@ -34,9 +41,9 @@ Método adicionarComodidade() para adicionar comodidades ao hotel.
 
     public Hotel(Acomodacao acomodacao, Hotel outroHotel) {
         super(acomodacao);
-        this.numeroQuartos = outroHotel.numeroQuartos;
-        this.quartosDisponiveis = outroHotel.quartosDisponiveis;
-        this.numeroEstrelas = outroHotel.numeroEstrelas;
+        this.numeroQuartos = outroHotel.getNumeroQuartos();
+        this.quartosDisponiveis = outroHotel.getQuartosDisponiveis();
+        this.numeroEstrelas = outroHotel.getNumeroEstrelas();
         numeroTotalHoteis++;
     }
 
@@ -47,27 +54,25 @@ Método adicionarComodidade() para adicionar comodidades ao hotel.
         System.out.println("Comodidades: ");
     }
 
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Hotel)) return false;
+        if (!(o instanceof Hotel hotel)) return false;
         if (!super.equals(o)) return false;
-        Hotel hotel = (Hotel) o;
         return getNumeroQuartos() == hotel.getNumeroQuartos() && getQuartosDisponiveis() == hotel.getQuartosDisponiveis() && getNumeroEstrelas() == hotel.getNumeroEstrelas();
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), getNumeroQuartos(), getQuartosDisponiveis(), getNumeroEstrelas());
-    }
-
-    @Override
     public String toString() {
         return "Hotel{" +
-                "numeroQuartos=" + numeroQuartos +
-                ", quartosDisponiveis=" + quartosDisponiveis +
-                ", numeroEstrelas=" + numeroEstrelas +
+                "numeroQuartos=" + this.numeroQuartos +
+                ", quartosDisponiveis=" + this.quartosDisponiveis +
+                ", numeroEstrelas=" + this.numeroEstrelas +
                 '}';
+    }
+
+    //utilização da classe abstrata
+    @Override
+    public String slogan(){
+        return "Bem vindo á reserva de Hotel!";
     }
 
     public int getQuartosDisponiveis() {

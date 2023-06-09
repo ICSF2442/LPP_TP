@@ -1,9 +1,13 @@
 package objects;
 
+
+
+import interfaces.precario;
+
 import java.util.Arrays;
 import java.util.Objects;
 
-public class Acomodacao {
+public class Acomodacao extends precario {
 
     /*
     No contexto de um projeto de reserva de hotéis, pode-se ter uma superclasse que representa uma entidade genérica, como por exemplo, a classe "Acomodação".
@@ -20,15 +24,12 @@ public class Acomodacao {
 
 
     public Acomodacao(String nome, String endereco, int classificacao, double precoNoite, String descricao) {
-        String[] comodidade = new String[0];
         this.nome = nome;
         this.endereco = endereco;
         this.classificacao = classificacao;
         this.precoNoite = precoNoite;
         this.descricao = descricao;
-        this.comodidades = comodidade;
-
-    }
+        this.comodidades = new String[0];}
 
     public Acomodacao(Acomodacao acomodacao) {
         this.nome = acomodacao.getNome();
@@ -39,12 +40,34 @@ public class Acomodacao {
         this.comodidades = acomodacao.getComodidades();
     }
 
+    public Acomodacao() {
+        this.comodidades = new String[0];
+    }
+
+    /**
+     * Adicionar comodidade á acomodaçao.
+     */
+    public void adicionarComodidade(String comodidade){
+        if(getComodidades().length != 0){
+            String[] comodidades = new String[getComodidades().length+1];
+            for(int i = 0; i < getComodidades().length; i++){
+                comodidades[i] = getComodidades()[i];
+            }
+            comodidades[getComodidades().length] = comodidade;
+            setComodidades(comodidades);
+        }else {
+            String[] comodidades = new String[1];
+            comodidades[0] = comodidade;
+            setComodidades(comodidades);
+        }
+    }
+
     public void print() {
-        System.out.println("Nome: " + nome);
-        System.out.println("Endereço: " + endereco);
-        System.out.println("Classificação: " + classificacao);
-        System.out.println("Preço: " + precoNoite);
-        System.out.println("Descrição: " + descricao);
+        System.out.println("Nome: " + this.nome);
+        System.out.println("Endereço: " + this.endereco);
+        System.out.println("Classificação: " + this.classificacao);
+        System.out.println("Preço: " + this.precoNoite);
+        System.out.println("Descrição: " + this.descricao);
         System.out.println("Comodidades: ");
         for(int i = 0; i < getComodidades().length; i++){
             System.out.print(getComodidades()[i]);
@@ -55,16 +78,13 @@ public class Acomodacao {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Acomodacao)) return false;
-        Acomodacao that = (Acomodacao) o;
+        if (!(o instanceof Acomodacao that)) return false;
         return getClassificacao() == that.getClassificacao() && Double.compare(that.getPrecoNoite(), getPrecoNoite()) == 0 && Objects.equals(getNome(), that.getNome()) && Objects.equals(getEndereco(), that.getEndereco()) && Objects.equals(getDescricao(), that.getDescricao()) && Arrays.equals(getComodidades(), that.getComodidades());
     }
 
     @Override
-    public int hashCode() {
-        int result = Objects.hash(getNome(), getEndereco(), getClassificacao(), getPrecoNoite(), getDescricao());
-        result = 31 * result + Arrays.hashCode(getComodidades());
-        return result;
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 
     @Override
@@ -77,6 +97,12 @@ public class Acomodacao {
                 ", descricao='" + descricao + '\'' +
                 ", comodidades=" + Arrays.toString(comodidades) +
                 '}';
+    }
+
+    //Utilização da classe abstrata
+    @Override
+    public double preco(int noites) {
+        return noites*this.precoNoite;
     }
 
     public String getNome() {
@@ -126,4 +152,6 @@ public class Acomodacao {
     public void setComodidades(String[] comodidades) {
         this.comodidades = comodidades;
     }
+
+
 }
