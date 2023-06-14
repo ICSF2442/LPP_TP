@@ -2,12 +2,10 @@ package objects;
 
 
 
-import interfaces.precario;
-
 import java.util.Arrays;
 import java.util.Objects;
 
-public class Acomodacao extends precario {
+public class Acomodacao  {
 
     /*
     No contexto de um projeto de reserva de hotéis, pode-se ter uma superclasse que representa uma entidade genérica, como por exemplo, a classe "Acomodação".
@@ -61,6 +59,10 @@ public class Acomodacao extends precario {
             setComodidades(comodidades);
         }
     }
+    //conceito de polimorfismo
+    public void descricao() {
+        System.out.println("Acomodação genérica");
+    }
 
     public void print() {
         System.out.println("Nome: " + this.nome);
@@ -99,11 +101,7 @@ public class Acomodacao extends precario {
                 '}';
     }
 
-    //Utilização da classe abstrata
-    @Override
-    public double preco(int noites) {
-        return noites*this.precoNoite;
-    }
+
 
     public String getNome() {
         return nome;

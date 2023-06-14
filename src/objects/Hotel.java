@@ -68,6 +68,10 @@ Método adicionarComodidade() para adicionar comodidades ao hotel.
                 ", numeroEstrelas=" + this.numeroEstrelas +
                 '}';
     }
+    //conceito de polimorfismo
+    public void descricao() {
+        System.out.println("Hotel");
+    }
 
     //utilização da classe abstrata
     @Override
