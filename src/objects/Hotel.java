@@ -51,7 +51,6 @@ Método adicionarComodidade() para adicionar comodidades ao hotel.
         super.print();
         System.out.println("Estrelas: "+getNumeroEstrelas());
         System.out.println("Número de quartos disponiveis: " + getQuartosDisponiveis() + " de "+getNumeroQuartos()+" totais.");
-        System.out.println("Comodidades: ");
     }
 
     public boolean equals(Object o) {
