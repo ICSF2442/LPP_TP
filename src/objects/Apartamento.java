@@ -20,12 +20,14 @@ public class Apartamento extends Acomodacao implements slogan {
     public void descricao() {
         System.out.println("Apartamento");
     }
+
+
     //utilização do slogan
     @Override
     public String slogan(){
         return "Bem vindo á reserva de Apartamentos!";
     }
-
+    @Override
     public void print() {
         super.print();
         System.out.println("Numero de quartos: " + getnQuartos());

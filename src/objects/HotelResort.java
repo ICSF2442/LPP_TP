@@ -8,6 +8,9 @@ public class HotelResort extends Hotel implements slogan {
         System.out.println("HotelResort");
     }
     //utilização da classe abstrata
+
+
+
     @Override
     public String slogan(){
         return "Bem vindo á reserva de HotelResort!";

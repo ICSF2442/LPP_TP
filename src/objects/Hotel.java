@@ -46,7 +46,7 @@ Método adicionarComodidade() para adicionar comodidades ao hotel.
         this.numeroEstrelas = outroHotel.getNumeroEstrelas();
         numeroTotalHoteis++;
     }
-
+    @Override
     public void print() {
         super.print();
         System.out.println("Estrelas: "+getNumeroEstrelas());
