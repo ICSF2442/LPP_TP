@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="462.0" prefWidth="589.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projetolpp.Controlador">
+   <children>
+      <Text fill="WHITE" layoutX="150.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Criação de Acomodação" textAlignment="CENTER">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="12.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tipo:">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Text>
+      <CheckBox id="checkBoxHotel" fx:id="checkBoxHotel" alignment="CENTER" cacheShape="false" centerShape="false" focusTraversable="false" layoutX="12.0" layoutY="137.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="51.0" scaleShape="false" text="Hotel" textAlignment="CENTER" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+      </CheckBox>
+      <CheckBox id="checkBoxHostel" fx:id="checkBoxHostel" alignment="CENTER" cacheShape="false" centerShape="false" focusTraversable="false" layoutX="12.0" layoutY="168.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="58.0" scaleShape="false" text="Hostel" textAlignment="CENTER" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+      </CheckBox>
+      <CheckBox id="checkBoxHotelResort" fx:id="checkBoxHotelResort" alignment="CENTER" cacheShape="false" centerShape="false" focusTraversable="false" layoutX="12.0" layoutY="199.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="88.0" scaleShape="false" text="Hotel Resort" textAlignment="CENTER" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+      </CheckBox>
+      <CheckBox id="checkBoxApartamento" fx:id="checkBoxApartamento" alignment="CENTER" cacheShape="false" centerShape="false" focusTraversable="false" layoutX="12.0" layoutY="230.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="97.0" scaleShape="false" text="Apartamento" textAlignment="CENTER" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+      </CheckBox>
+      <TextField id="nomeAcomodacao" fx:id="nomeAcomodacao" layoutX="386.0" layoutY="103.0" promptText="Nome" />
+      <Text fill="WHITE" layoutX="274.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="274.0" layoutY="174.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Endereço" wrappingWidth="70.40155029296875">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Text>
+      <TextField id="enderecoAcomodacao" fx:id="enderecoAcomodacao" layoutX="386.0" layoutY="156.0" promptText="Endereço" />
+      <Text fill="WHITE" layoutX="12.0" layoutY="314.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Classificação:">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Text>
+      <ChoiceBox id="classificacaoChoice" fx:id="classificacaoChoice" layoutX="14.0" layoutY="342.0" prefWidth="150.0" />
+      <Text fill="WHITE" layoutX="274.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Preço p/noite" wrappingWidth="111.73492431640625">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Text>
+      <TextField id="precoAcomodacao" fx:id="precoAcomodacao" layoutX="386.0" layoutY="202.0" promptText="Preço" />
+      <Text fill="WHITE" layoutX="273.0" layoutY="314.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Inserir comodidades:">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Text>
+      <TextArea id="comodidadeInsert" fx:id="comodidadeInsert" layoutX="273.0" layoutY="335.0" prefHeight="31.0" prefWidth="276.0" />
+      <Button id="submeterComodidade" fx:id="submeterComodidade" layoutX="481.0" layoutY="380.0" mnemonicParsing="false" text="Submeter" />
+      <Button id="submeterAcomodacao" fx:id="submeterAcomodacao" alignment="CENTER" contentDisplay="CENTER" layoutX="222.0" layoutY="405.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="150.0" text="Submeter Acomodação" />
+   </children>
+</Pane>

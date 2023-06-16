@@ -1,9 +1,7 @@
-package objects;
+package comn.objects;
 
-import interfaces.slogan;
-
+import comn.interfaces.slogan;
 import java.util.Arrays;
-import java.util.Objects;
 
 public class Hostel extends Acomodacao implements slogan {
 

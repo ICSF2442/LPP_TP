@@ -1,16 +1,8 @@
-package objects;
+package comn.objects;
 
-import interfaces.slogan;
+import comn.interfaces.slogan;
 
 public class HotelResort extends Hotel implements slogan {
-
-
-
-
-
-
-
-
     private String[] atividades;
 
 
