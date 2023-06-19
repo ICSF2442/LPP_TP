@@ -44,9 +44,11 @@ public class HotelResort extends Hotel implements slogan {
 
     @Override
     public String toString() {
-        return super.toString() + "HotelResort{" +
-                "atividades=" + Arrays.toString(atividades) +
-                '}'+"\n";
+        return super.toString() +
+                "Atividades=" + Arrays.toString(atividades) + "\n" +
+                "Slogan: " + slogan() + "\n" +
+                "Descrição: "+ descricao() + "\n"
+                ;
     }
 
     public String[] getAtividades() {
@@ -58,8 +60,8 @@ public class HotelResort extends Hotel implements slogan {
     }
 
     //conceito de polimorfismo
-    public void descricao() {
-        System.out.println("HotelResort");
+    public String descricao() {
+        return "HotelResort";
     }
     //utilização da classe abstrata
 

@@ -85,8 +85,8 @@ private Hostel[] listadeHostel;
 
 
     //conceito de polimorfismo
-    public void descricao() {
-        System.out.println("Hostel");
+    public String descricao() {
+        return"Hostel";
     }
 
     //utilização da interface
@@ -97,13 +97,15 @@ private Hostel[] listadeHostel;
 
     @Override
     public String toString() {
-        return super.toString() +"Hostel{" +
-                ", nDormitoriosTotal=" + nDormitoriosTotal + "\n"+
-                ", nDormitoriosDisponiveis=" + nDormitoriosDisponiveis + "\n"+
-                ", casaDeBanhoCompartilhada=" + casaDeBanhoCompartilhada + "\n"+
-                ", internet=" + internet + "\n"+
-                ", quartosCompartilhados=" + quartosCompartilhados + "\n"+
-                '}'+"\n";
+        return super.toString() +
+                "Numero de dormitorios: " + nDormitoriosTotal + "\n"+
+                "Numero de dormitorios disponiveis: " + nDormitoriosDisponiveis + "\n"+
+                "Casa de banho compartilhadas: " + casaDeBanhoCompartilhada + "\n"+
+                "Internet: " + internet + "\n"+
+                "Quartos compartilhados: " + quartosCompartilhados + "\n"+
+                "Slogan: "+ slogan() + "\n"+
+                "Descrição: "+ descricao() + "\n";
+
     }
 
     public int getnDormitoriosTotal() {

@@ -66,15 +66,17 @@ Método adicionarComodidade() para adicionar comodidades ao hotel.
     }
 
     public String toString() {
-        return super.toString() + "Hotel{" + "\n"+
-                "numeroQuartos=" + this.numeroQuartos + "\n"+
-                ", quartosDisponiveis=" + this.quartosDisponiveis + "\n"+
-                ", numeroEstrelas=" + this.numeroEstrelas + "\n"+
-                '}'+"\n";
+        return super.toString() +
+                "Numero de quartos: " + this.numeroQuartos + "\n"+
+                "Quartos disponiveis: " + this.quartosDisponiveis + "\n"+
+                "Numero de estrelas: " + this.numeroEstrelas + "\n"+
+                "Slogan: " + slogan() + "\n" +
+                "Descrição: "+ descricao() +"\n"
+                ;
     }
     //conceito de polimorfismo
-    public void descricao() {
-        System.out.println("Hotel");
+    public String descricao() {
+        return "Hotel";
     }
 
     //utilização da classe abstrata

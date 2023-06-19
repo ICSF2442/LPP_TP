@@ -16,8 +16,8 @@ public class Apartamento extends Acomodacao implements slogan {
     private int cozinha;
 
     //conceito de polimorfismo
-    public void descricao() {
-        System.out.println("Apartamento");
+    public String descricao() {
+        return"Apartamento";
     }
 
 
@@ -77,15 +77,18 @@ public class Apartamento extends Acomodacao implements slogan {
     }
 
 
-    @Override
     public String toString() {
-        return super.toString() + "Apartamento{" + "\n"+
-                "nQuartos=" + nQuartos + "\n"+
-                ", areaTotal=" + areaTotal + "\n"+
-                ", nCasaDeBanhos=" + nCasaDeBanhos + "\n"+
-                ", internet=" + internet + "\n"+
-                ", cozinha=" + cozinha + "\n"+
-                '}'+"\n";
+        return super.toString() +
+
+                "  Numero de quartos: " + nQuartos + "\n" +
+                "  Area total: " + areaTotal + "\n" +
+                "  Numero de casa de banhos: " + nCasaDeBanhos + "\n" +
+                "  Internet: " + internet  + "\n" +
+                "  Cozinha  " + cozinha  + "\n" +
+                "Slogan: " + slogan() + "\n"+
+                "Descrição" + descricao() + "\n";
+
+
     }
 
     public int getnQuartos() {

@@ -54,8 +54,8 @@ public class Acomodacao  {
         }
     }
     //conceito de polimorfismo
-    public void descricao() {
-        System.out.println("Acomodação genérica");
+    public String descricao() {
+        return "Acomodação genérica";
     }
 
     public void print() {
@@ -85,15 +85,16 @@ public class Acomodacao  {
 
     @Override
     public String toString() {
-        return "Acomodacao{" +
-                "nome='" + nome + '\'' + "\n"+
-                ", endereco='" + endereco + '\'' + "\n"+
-                ", classificacao=" + classificacao + "\n"+
-                ", precoNoite=" + precoNoite + "\n"+
-                ", descricao='" + descricao + '\'' + "\n"+
-                ", comodidades=" + Arrays.toString(comodidades) + "\n"+
-                '}'+"\n";
-    }
+        return
+                "Nome: " + nome + '\'' + "\n"+
+                "Endereco: " + endereco + '\'' + "\n"+
+                "Classificação: " + classificacao + "\n"+
+                "PrecoNoite: " + precoNoite + "\n"+
+                "Descrição: " + descricao + '\'' + "\n"+
+                "Coomodidades: " + Arrays.toString(comodidades) + "\n"+
+                "\n";}
+
+
 
 
 
