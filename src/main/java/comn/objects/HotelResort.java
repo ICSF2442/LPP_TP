@@ -2,27 +2,29 @@ package comn.objects;
 
 import comn.interfaces.slogan;
 
+import java.util.Arrays;
+
 public class HotelResort extends Hotel implements slogan {
     private String[] atividades;
 
-
-    public HotelResort(String[] atividades) {
-        this.atividades = atividades;
+    public HotelResort() {
+        super();
+        this.atividades = new String[0];
     }
 
     public HotelResort(Acomodacao acomodacao, String[] atividades) {
         super(acomodacao);
-        this.atividades = atividades;
+        this.atividades = new String[0];
     }
 
-    public HotelResort(Acomodacao acomodacao, int numeroQuartos, int quartosDisponiveis, int numeroEstrelas, String[] atividades) {
+    public HotelResort(Acomodacao acomodacao, int numeroQuartos, int quartosDisponiveis, int numeroEstrelas) {
         super(acomodacao, numeroQuartos, quartosDisponiveis, numeroEstrelas);
-        this.atividades = atividades;
+        this.atividades = new String[0];
     }
 
-    public HotelResort(Acomodacao acomodacao, Hotel outroHotel, String[] atividades) {
+    public HotelResort(Acomodacao acomodacao, Hotel outroHotel) {
         super(acomodacao, outroHotel);
-        this.atividades = atividades;
+        this.atividades = new String[0];
     }
 
     public void adicionarAtividade(String atividade){
@@ -39,6 +41,14 @@ public class HotelResort extends Hotel implements slogan {
             setAtividades(atividades);
         }
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + "HotelResort{" +
+                "atividades=" + Arrays.toString(atividades) +
+                '}'+"\n";
+    }
+
     public String[] getAtividades() {
         return atividades;
     }

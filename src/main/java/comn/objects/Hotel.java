@@ -14,16 +14,23 @@ Sobreposição dos métodos toString(), clone() e equals() herdados da classe Ob
 Método print() para imprimir os atributos.
 Método adicionarComodidade() para adicionar comodidades ao hotel.
      */
-    private Hotel[] listadeHotel;
     private int numeroQuartos;
     private int quartosDisponiveis;
     private static int numeroTotalHoteis;
     private int numeroEstrelas;
 
 
+    public Hotel(String nome, String endereco, int classificacao, double precoNoite, String descricao, int numeroQuartos, int quartosDisponiveis, int numeroEstrelas) {
+        super(nome, endereco, classificacao, precoNoite, descricao);
+        this.numeroQuartos = numeroQuartos;
+        this.quartosDisponiveis = quartosDisponiveis;
+        this.numeroEstrelas = numeroEstrelas;
+    }
+
     public Hotel(){
         super();
         numeroTotalHoteis++;
+
     }
     public Hotel(Acomodacao acomodacao) { super(acomodacao);
         numeroTotalHoteis++;
@@ -36,8 +43,8 @@ Método adicionarComodidade() para adicionar comodidades ao hotel.
         this.numeroEstrelas = numeroEstrelas;
         numeroTotalHoteis++;
     }
-
     public Hotel(Acomodacao acomodacao, Hotel outroHotel) {
+
         super(acomodacao);
         this.numeroQuartos = outroHotel.getNumeroQuartos();
         this.quartosDisponiveis = outroHotel.getQuartosDisponiveis();
@@ -45,21 +52,10 @@ Método adicionarComodidade() para adicionar comodidades ao hotel.
         numeroTotalHoteis++;
     }
 
-
-    public void adicionarHotellista(){
-        Hotel[] lista = new Hotel[this.listadeHotel.length+1];
-
-
-    }
-    public void listar(){
-        for (Hotel hotel : listadeHotel) {
-            hotel.print();
-        }
-    }
     @Override
     public void print() {
         super.print();
-        Controlador.descriptionHotels.append("Estrelas: " +getNumeroEstrelas() + "Número de quartos disponiveis: " + getQuartosDisponiveis() + " de "+getNumeroQuartos()+" totais.\n");
+        System.out.print("Estrelas: " +getNumeroEstrelas() + "Número de quartos disponiveis: " + getQuartosDisponiveis() + " de "+getNumeroQuartos()+" totais.\n");
     }
 
     public boolean equals(Object o) {
@@ -70,11 +66,11 @@ Método adicionarComodidade() para adicionar comodidades ao hotel.
     }
 
     public String toString() {
-        return "Hotel{" +
-                "numeroQuartos=" + this.numeroQuartos +
-                ", quartosDisponiveis=" + this.quartosDisponiveis +
-                ", numeroEstrelas=" + this.numeroEstrelas +
-                '}';
+        return super.toString() + "Hotel{" + "\n"+
+                "numeroQuartos=" + this.numeroQuartos + "\n"+
+                ", quartosDisponiveis=" + this.quartosDisponiveis + "\n"+
+                ", numeroEstrelas=" + this.numeroEstrelas + "\n"+
+                '}'+"\n";
     }
     //conceito de polimorfismo
     public void descricao() {
@@ -109,14 +105,6 @@ Método adicionarComodidade() para adicionar comodidades ao hotel.
 
     public static void setNumeroTotalHoteis(int numeroTotalHoteis) {
         Hotel.numeroTotalHoteis = numeroTotalHoteis;
-    }
-
-    public Hotel[] getListadeHotel() {
-        return listadeHotel;
-    }
-
-    public void setListadeHotel(Hotel[] listadeHotel) {
-        this.listadeHotel = listadeHotel;
     }
 
     public int getNumeroEstrelas() {return numeroEstrelas;}

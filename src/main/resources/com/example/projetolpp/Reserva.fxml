@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="502.0" prefWidth="722.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projetolpp.Controlador">   <children>
+<Pane id="paneAcomodacao" fx:id="paneAcomodacao" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="502.0" prefWidth="722.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projetolpp.Controlador">   <children>
       <Button id="botaoHotel" fx:id="botaoHotel" layoutX="22.0" layoutY="69.0" mnemonicParsing="false" onAction="#onMostrarHoteis" prefHeight="60.0" prefWidth="92.0" text="Hotel " />
       <Button id="botaoHostel" fx:id="botaoHostel" layoutX="22.0" layoutY="145.0" mnemonicParsing="false" onAction="#onMostrarHosteis" prefHeight="60.0" prefWidth="92.0" text="Hostel" />
       <Button id="botaoApartamento" fx:id="botaoApartamento" layoutX="22.0" layoutY="221.0" mnemonicParsing="false" onAction="#onMostrarApartamentos" prefHeight="60.0" prefWidth="92.0" text="Apartamento" />
@@ -13,18 +13,18 @@
             <Font size="26.0" />
          </font>
       </Text>
-      <ButtonBar id="barraButoes" fx:id="barraButoes" layoutX="443.0" layoutY="49.0" prefHeight="40.0" prefWidth="200.0">
+      <ButtonBar id="barraBotoes" fx:id="barraBotoes" layoutX="443.0" layoutY="49.0" prefHeight="40.0" prefWidth="200.0">
          <buttons>
-            <Button id="normalHotelButao" fx:id="normalHotelButao" mnemonicParsing="false" text="Normal" />
-          <Button id="resortHotelbutao" fx:id="resortHotelbutao" mnemonicParsing="false" text="Resort" />
+            <Button id="normalHotelBotao" fx:id="normalHotelBotao" mnemonicParsing="false" text="Normal" />
+            <Button id="resortHotelbotao" fx:id="resortHotelbotao" mnemonicParsing="false" text="Resort" />
          </buttons>
       </ButtonBar>
-      <Text fill="WHITE" layoutX="412.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tipo de hotel" textAlignment="CENTER" wrappingWidth="300.0">
+      <Text fill="WHITE" layoutX="412.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tipo de hotel" textAlignment="CENTER" visible="false" wrappingWidth="300.0">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Button id="criarAcomodacao" fx:id="criarAcomodacao" layoutX="164.0" layoutY="69.0" mnemonicParsing="false" prefHeight="78.0" prefWidth="114.0" text="Criar Acomodacao" />
-      <TextField id="listagemAcomodacao" fx:id="listagemAcomodacao" editable="false" layoutX="164.0" layoutY="175.0" prefHeight="276.0" prefWidth="479.0" />
+      <Button id="criarAcomodacao" fx:id="criarAcomodacao" layoutX="164.0" layoutY="69.0" mnemonicParsing="false" onMouseClicked="#clicarAcomodacao" prefHeight="78.0" prefWidth="114.0" text="Criar Acomodacao" />
+      <TextArea id="listagemAcomodacao" fx:id="listagemAcomodacao" editable="false" layoutX="134.0" layoutY="172.0" prefHeight="303.0" prefWidth="566.0" />
    </children>
 </Pane>

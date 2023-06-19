@@ -16,7 +16,7 @@ Cozinha compartilhada: Indica se o hostel disponibiliza uma cozinha para os hós
 Wi-Fi: Indica se o hostel oferece acesso à internet sem fio para os hóspedes.
 Café da manhã: Indica se o hostel oferece café da manhã incluso na diária.
  */
-
+private Hostel[] listadeHostel;
     private int nDormitoriosTotal;
 
     private int nDormitoriosDisponiveis;
@@ -30,24 +30,24 @@ Café da manhã: Indica se o hostel oferece café da manhã incluso na diária.
     private String[] areasCompartilhadas;
 
 
-    public Hostel(String nome, String endereco, int classificacao, double precoNoite, String descricao, int nDormitoriosTotal, int nDormitoriosDisponiveis, int casaDeBanhoCompartilhada, int internet, int quartosCompartilhados, String[] areasCompartilhadas) {
-        super(nome, endereco, classificacao, precoNoite, descricao);
-        this.nDormitoriosTotal = nDormitoriosTotal;
-        this.nDormitoriosDisponiveis = nDormitoriosDisponiveis;
-        this.casaDeBanhoCompartilhada = casaDeBanhoCompartilhada;
-        this.internet = internet;
-        this.quartosCompartilhados = quartosCompartilhados;
-        this.areasCompartilhadas = areasCompartilhadas;
+    public Hostel() {
+        super();
+        aumentarListaHostel(this);
     }
 
-    public Hostel(Acomodacao acomodacao, int nDormitoriosTotal, int nDormitoriosDisponiveis, int casaDeBanhoCompartilhada, int internet, int quartosCompartilhados, String[] areasCompartilhadas) {
+    public Hostel(Acomodacao acomodacao) {
         super(acomodacao);
+        aumentarListaHostel(this);
+    }
+
+    public Hostel(int nDormitoriosTotal, int nDormitoriosDisponiveis, int casaDeBanhoCompartilhada, int internet, int quartosCompartilhados, String[] areasCompartilhadas) {
         this.nDormitoriosTotal = nDormitoriosTotal;
         this.nDormitoriosDisponiveis = nDormitoriosDisponiveis;
         this.casaDeBanhoCompartilhada = casaDeBanhoCompartilhada;
         this.internet = internet;
         this.quartosCompartilhados = quartosCompartilhados;
         this.areasCompartilhadas = areasCompartilhadas;
+        aumentarListaHostel(this);
     }
 
     public Hostel(Acomodacao acomodacao, Hostel outroHostel) {
@@ -58,14 +58,29 @@ Café da manhã: Indica se o hostel oferece café da manhã incluso na diária.
         this.internet = outroHostel.getInternet();
         this.quartosCompartilhados = outroHostel.quartosCompartilhados;
         this.areasCompartilhadas = outroHostel.areasCompartilhadas;
+        aumentarListaHostel(this);
     }
 
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Hostel)) return false;
+        if (!(o instanceof Hostel hostel)) return false;
         if (!super.equals(o)) return false;
-        Hostel hostel = (Hostel) o;
         return getnDormitoriosTotal() == hostel.getnDormitoriosTotal() && getnDormitoriosDisponiveis() == hostel.getnDormitoriosDisponiveis() && getCasaDeBanhoCompartilhada() == hostel.getCasaDeBanhoCompartilhada() && getInternet() == hostel.getInternet() && getQuartosCompartilhados() == hostel.getQuartosCompartilhados() && Arrays.equals(getAreasCompartilhadas(), hostel.getAreasCompartilhadas());
+    }
+
+    public void aumentarListaHostel(Hostel hostel){
+        Hostel[] hosteis = new Hostel[getListadeHostel().length+1];
+        for(int i = 0; i < getComodidades().length; i++){
+            hosteis[i] = getListadeHostel()[i];
+        }
+        hosteis[getComodidades().length] = hostel;
+        setListadeHostel(hosteis);
+    }
+
+    public void listar(){
+        for (Hostel hostel : listadeHostel) {
+            hostel.print();
+        }
     }
 
 
@@ -80,8 +95,16 @@ Café da manhã: Indica se o hostel oferece café da manhã incluso na diária.
         return "Bem vindo á reserva de Hostel!";
     }
 
-
-
+    @Override
+    public String toString() {
+        return super.toString() +"Hostel{" +
+                ", nDormitoriosTotal=" + nDormitoriosTotal + "\n"+
+                ", nDormitoriosDisponiveis=" + nDormitoriosDisponiveis + "\n"+
+                ", casaDeBanhoCompartilhada=" + casaDeBanhoCompartilhada + "\n"+
+                ", internet=" + internet + "\n"+
+                ", quartosCompartilhados=" + quartosCompartilhados + "\n"+
+                '}'+"\n";
+    }
 
     public int getnDormitoriosTotal() {
         return nDormitoriosTotal;
@@ -121,6 +144,14 @@ Café da manhã: Indica se o hostel oferece café da manhã incluso na diária.
 
     public void setQuartosCompartilhados(int quartosCompartilhados) {
         this.quartosCompartilhados = quartosCompartilhados;
+    }
+
+    public Hostel[] getListadeHostel() {
+        return listadeHostel;
+    }
+
+    public void setListadeHostel(Hostel[] listadeHostel) {
+        this.listadeHostel = listadeHostel;
     }
 
     public String[] getAreasCompartilhadas() {

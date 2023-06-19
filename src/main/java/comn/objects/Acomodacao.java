@@ -60,10 +60,10 @@ public class Acomodacao  {
 
     public void print() {
         System.out.println("Nome: " + this.nome);
-        System.out.println("Endereço: " + this.endereco);
-        System.out.println("Classificação: " + this.classificacao);
-        System.out.println("Preço: " + this.precoNoite);
-        System.out.println("Descrição: " + this.descricao);
+        System.out.println("Endereco: " + this.endereco);
+        System.out.println("Classificacao: " + this.classificacao);
+        System.out.println("Preco: " + this.precoNoite);
+        System.out.println("Descricao: " + this.descricao);
         System.out.println("Comodidades: ");
         for(int i = 0; i < getComodidades().length; i++){
             System.out.print(getComodidades()[i]);
@@ -86,13 +86,13 @@ public class Acomodacao  {
     @Override
     public String toString() {
         return "Acomodacao{" +
-                "nome='" + nome + '\'' +
-                ", endereco='" + endereco + '\'' +
-                ", classificacao=" + classificacao +
-                ", precoNoite=" + precoNoite +
-                ", descricao='" + descricao + '\'' +
-                ", comodidades=" + Arrays.toString(comodidades) +
-                '}';
+                "nome='" + nome + '\'' + "\n"+
+                ", endereco='" + endereco + '\'' + "\n"+
+                ", classificacao=" + classificacao + "\n"+
+                ", precoNoite=" + precoNoite + "\n"+
+                ", descricao='" + descricao + '\'' + "\n"+
+                ", comodidades=" + Arrays.toString(comodidades) + "\n"+
+                '}'+"\n";
     }
 
 
