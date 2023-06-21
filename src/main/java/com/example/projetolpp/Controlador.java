@@ -13,8 +13,25 @@ import java.io.IOException;
 public class Controlador {
 
     @FXML
-    public ButtonBar barraBotoes;
-    public Pane paneAcomodacao;
+    private ButtonBar barraBotoes;
+    @FXML
+    private Pane paneAcomodacao;
+    @FXML
+    private ChoiceBox<Integer> classificacaoChoice;
+    @FXML
+    private TextField precoAcomodacao;
+    @FXML
+    private TextArea comodidadeInsert;
+    @FXML
+    private Button submeterComodidade;
+    @FXML
+    private Button submeterAcomodacao;
+    @FXML
+    private ChoiceBox tipoDeAcomodacao;
+    @FXML
+    private TextField enderecoAcomodacao;
+    @FXML
+    private TextField nomeAcomodacao;
     @FXML
     private Label welcomeText;
     @FXML
@@ -32,16 +49,20 @@ public class Controlador {
     @FXML
     private Button criarAcomodacao;
 
+
     public static StringBuilder descriptionHotels = new StringBuilder();
 
     public void initialize() throws IOException { //Inicialização do código para fazer a analíse do texto exportando os objetos.
         comn.main main = new main();
+
         main.initialize(listagemAcomodacao, botaoHotel, botaoHostel,botaoApartamento,normalHotelBotao,resortHotelbotao,criarAcomodacao,barraBotoes);
     }
 
     public void clicarAcomodacao(){
 
     }
+
+
 
     @FXML
     protected void onHelloButtonClick() {

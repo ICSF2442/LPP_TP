@@ -32,12 +32,10 @@ private Hostel[] listadeHostel;
 
     public Hostel() {
         super();
-        aumentarListaHostel(this);
     }
 
     public Hostel(Acomodacao acomodacao) {
         super(acomodacao);
-        aumentarListaHostel(this);
     }
 
     public Hostel(int nDormitoriosTotal, int nDormitoriosDisponiveis, int casaDeBanhoCompartilhada, int internet, int quartosCompartilhados, String[] areasCompartilhadas) {
@@ -47,7 +45,6 @@ private Hostel[] listadeHostel;
         this.internet = internet;
         this.quartosCompartilhados = quartosCompartilhados;
         this.areasCompartilhadas = areasCompartilhadas;
-        aumentarListaHostel(this);
     }
 
     public Hostel(Acomodacao acomodacao, Hostel outroHostel) {
@@ -58,7 +55,6 @@ private Hostel[] listadeHostel;
         this.internet = outroHostel.getInternet();
         this.quartosCompartilhados = outroHostel.quartosCompartilhados;
         this.areasCompartilhadas = outroHostel.areasCompartilhadas;
-        aumentarListaHostel(this);
     }
 
     public boolean equals(Object o) {
@@ -68,14 +64,7 @@ private Hostel[] listadeHostel;
         return getnDormitoriosTotal() == hostel.getnDormitoriosTotal() && getnDormitoriosDisponiveis() == hostel.getnDormitoriosDisponiveis() && getCasaDeBanhoCompartilhada() == hostel.getCasaDeBanhoCompartilhada() && getInternet() == hostel.getInternet() && getQuartosCompartilhados() == hostel.getQuartosCompartilhados() && Arrays.equals(getAreasCompartilhadas(), hostel.getAreasCompartilhadas());
     }
 
-    public void aumentarListaHostel(Hostel hostel){
-        Hostel[] hosteis = new Hostel[getListadeHostel().length+1];
-        for(int i = 0; i < getComodidades().length; i++){
-            hosteis[i] = getListadeHostel()[i];
-        }
-        hosteis[getComodidades().length] = hostel;
-        setListadeHostel(hosteis);
-    }
+
 
     public void listar(){
         for (Hostel hostel : listadeHostel) {
@@ -85,8 +74,8 @@ private Hostel[] listadeHostel;
 
 
     //conceito de polimorfismo
-    public String descricao() {
-        return"Hostel";
+    public void descricao() {
+        System.out.println("Hostel");
     }
 
     //utilização da interface

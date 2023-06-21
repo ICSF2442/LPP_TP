@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projetolpp.ControladorHotel">
+   <children>
+      <Text fill="WHITE" layoutX="203.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Criação de Hotel ">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="109.0" layoutY="168.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numero de quartos:" />
+      <TextField id="nQuartosInsert" fx:id="nQuartosInsert" layoutX="224.0" layoutY="151.0" promptText="Nº de quartos" />
+      <Text fill="WHITE" layoutX="109.0" layoutY="199.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quartos dísponiveis:" />
+      <TextField id="nQuartosDisponiveisInsert" fx:id="nQuartosDisponiveisInsert" layoutX="224.0" layoutY="182.0" promptText="Nº de quartos disponiveis" />
+      <Text fill="WHITE" layoutX="108.0" layoutY="228.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nº de estrela:" />
+
+      <ChoiceBox id="nEstrelasInsert" fx:id="nEstrelasInsert" layoutX="224.0" layoutY="211.0" prefHeight="25.0" prefWidth="150.0"/>
+
+
+      <Button id="submeterHotel" fx:id="submeterHotel" layoutX="373.0" layoutY="258.0" mnemonicParsing="false" text="Submeter" />
+   </children>
+</Pane>

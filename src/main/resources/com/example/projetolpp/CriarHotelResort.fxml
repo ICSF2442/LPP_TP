@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projetolpp.ControladorHotelResort">
+   <children>
+      <Text fill="WHITE" layoutX="213.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Criação de HotelResort ">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="25.0" layoutY="167.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Atividades: " />
+      <TextField id="listaAtividades" fx:id="listaAtividade" layoutX="412.0" layoutY="89.0" prefHeight="249.0" prefWidth="171.0" />
+      <Button id="adicionarAtividade" fx:id="adicionarAtividade" layoutX="126.0" layoutY="188.0" mnemonicParsing="false" text="Adicionar " />
+      <TextField id="insertAtividades" fx:id="insertAtividades" layoutX="86.0" layoutY="150.0" promptText="adicionar atividades" />
+      <Text fill="WHITE" layoutX="448.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lista de atividades" />
+   </children>
+</Pane>

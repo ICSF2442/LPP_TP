@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projetolpp.ControladorApartamento">
+   <children>
+      <Text fill="WHITE" layoutX="193.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Criação de Apartamento">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="99.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numero de quartos:" />
+      <TextField id="nQuartosInsert" fx:id="nQuartosInsert" layoutX="214.0" layoutY="141.0" promptText="Nº de quartos" />
+      <Text fill="WHITE" layoutX="99.0" layoutY="189.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Area total: " />
+      <TextField id="areaTotalInsert" fx:id="areaTotalInsert" layoutX="214.0" layoutY="172.0" promptText="Area" />
+      <Text fill="WHITE" layoutX="99.0" layoutY="219.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numero de Casas de banho:" />
+      <TextField id="nDeWCinsert" fx:id="nDeWCinsert" layoutX="258.0" layoutY="202.0" promptText="Nº de WC" />
+      <Text fill="WHITE" layoutX="99.0" layoutY="251.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Internet:" />
+      <Text fill="WHITE" layoutX="99.0" layoutY="283.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cozinha:" />
+      <MenuButton id="internetInsert" fx:id="internetInsert" layoutX="214.0" layoutY="234.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" text="Opção">
+        <items>
+          <MenuItem mnemonicParsing="false" text="Action 1" />
+          <MenuItem mnemonicParsing="false" text="Action 2" />
+        </items>
+      </MenuButton>
+      <MenuButton id="cozinhaInsert" fx:id="cozinhaInsert" layoutX="214.0" layoutY="266.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" text="Opção">
+         <items>
+            <MenuItem mnemonicParsing="false" text="Action 1" />
+            <MenuItem mnemonicParsing="false" text="Action 2" />
+         </items>
+      </MenuButton>
+      <Button fx:id="submeterApartamento" layoutX="364.0" layoutY="307.0" mnemonicParsing="false" text="Submeter" />
+   </children>
+</Pane>
