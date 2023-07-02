@@ -46,6 +46,10 @@ public class Apartamento extends Acomodacao implements slogan {
         this.cozinha = cozinha;
     }
 
+    public Apartamento(Acomodacao acomodacao) {
+        super(acomodacao);
+    }
+
     public Apartamento(Acomodacao acomodacao, int nQuartos, double areaTotal, int nCasaDeBanhos, int internet, int cozinha) {
         super(acomodacao);
         this.nQuartos = nQuartos;

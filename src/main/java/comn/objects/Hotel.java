@@ -3,6 +3,8 @@ package comn.objects;
 import com.example.projetolpp.Controlador;
 import comn.interfaces.slogan;
 
+import java.util.Objects;
+
 public class Hotel extends Acomodacao implements slogan {
 
     /*
@@ -14,65 +16,67 @@ Sobreposição dos métodos toString(), clone() e equals() herdados da classe Ob
 Método print() para imprimir os atributos.
 Método adicionarComodidade() para adicionar comodidades ao hotel.
      */
-    private int numeroQuartos;
-    private int quartosDisponiveis;
-    private static int numeroTotalHoteis;
+
+    private String categoria;
     private int numeroEstrelas;
+
+    private int acessibilidade;
 
 
     public Hotel(String nome, String endereco, int classificacao, double precoNoite, String descricao, int numeroQuartos, int quartosDisponiveis, int numeroEstrelas) {
         super(nome, endereco, classificacao, precoNoite, descricao);
-        this.numeroQuartos = numeroQuartos;
-        this.quartosDisponiveis = quartosDisponiveis;
         this.numeroEstrelas = numeroEstrelas;
     }
 
     public Hotel(){
         super();
-        numeroTotalHoteis++;
 
     }
     public Hotel(Acomodacao acomodacao) { super(acomodacao);
-        numeroTotalHoteis++;
     }
 
-    public Hotel(Acomodacao acomodacao, int numeroQuartos, int quartosDisponiveis, int numeroEstrelas) {
+    public Hotel(Acomodacao acomodacao,String categoria,int acessibilidade , int numeroEstrelas) {
         super(acomodacao);
-        this.numeroQuartos = numeroQuartos;
-        this.quartosDisponiveis = quartosDisponiveis;
+        this.categoria = categoria;
+        this.acessibilidade = acessibilidade;
         this.numeroEstrelas = numeroEstrelas;
-        numeroTotalHoteis++;
     }
     public Hotel(Acomodacao acomodacao, Hotel outroHotel) {
 
         super(acomodacao);
-        this.numeroQuartos = outroHotel.getNumeroQuartos();
-        this.quartosDisponiveis = outroHotel.getQuartosDisponiveis();
+        this.categoria = outroHotel.getCategoria();
+        this.acessibilidade = outroHotel.getAcessibilidade();
         this.numeroEstrelas = outroHotel.getNumeroEstrelas();
-        numeroTotalHoteis++;
     }
 
     @Override
     public void print() {
         super.print();
-        System.out.print("Estrelas: " +getNumeroEstrelas() + "Número de quartos disponiveis: " + getQuartosDisponiveis() + " de "+getNumeroQuartos()+" totais.\n");
+        System.out.print("Estrelas: " +getNumeroEstrelas() + "Categoria de hotel: " + getCategoria() + " Acessibilidade? "+getAcessibilidade()+"\n");
     }
 
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Hotel hotel)) return false;
         if (!super.equals(o)) return false;
-        return getNumeroQuartos() == hotel.getNumeroQuartos() && getQuartosDisponiveis() == hotel.getQuartosDisponiveis() && getNumeroEstrelas() == hotel.getNumeroEstrelas();
+        return getNumeroEstrelas() == hotel.getNumeroEstrelas() && getAcessibilidade() == hotel.getAcessibilidade() && Objects.equals(getCategoria(), hotel.getCategoria());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getCategoria(), getNumeroEstrelas(), getAcessibilidade());
     }
 
     public String toString() {
+        String acessibilidadeString = (this.acessibilidade == 1) ? "Sim" : "Não";
+
         return super.toString() +
-                "Numero de quartos: " + this.numeroQuartos + "\n"+
-                "Quartos disponiveis: " + this.quartosDisponiveis + "\n"+
-                "Numero de estrelas: " + this.numeroEstrelas + "\n"+
+                "Categoria do hotel: " + this.categoria + "\n" +
+                "Acessibilidae?: " + acessibilidadeString + "\n" +
+                "Numero de estrelas: " + this.numeroEstrelas + "\n" +
                 "Slogan: " + slogan() + "\n" +
-                "Descrição: "+ descricao() +"\n"
-                ;
+                "Descrição: " + descricao() + "\n";
     }
     //conceito de polimorfismo
     public String descricao() {
@@ -85,31 +89,25 @@ Método adicionarComodidade() para adicionar comodidades ao hotel.
         return "Bem vindo á reserva de Hotel!";
     }
 
-    public int getQuartosDisponiveis() {
-        return quartosDisponiveis;
-    }
-
-    public void setQuartosDisponiveis(int quartosDisponiveis) {
-        this.quartosDisponiveis = quartosDisponiveis;
-    }
-
-    public int getNumeroQuartos() {
-        return numeroQuartos;
-    }
-
-    public void setNumeroQuartos(int numeroQuartos) {
-        this.numeroQuartos = numeroQuartos;
-    }
-
-    public static int getNumeroTotalHoteis() {
-        return numeroTotalHoteis;
-    }
-
-    public static void setNumeroTotalHoteis(int numeroTotalHoteis) {
-        Hotel.numeroTotalHoteis = numeroTotalHoteis;
-    }
-
     public int getNumeroEstrelas() {return numeroEstrelas;}
 
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+
+    public int getAcessibilidade() {
+        return acessibilidade;
+    }
+
+    public void setAcessibilidade(int acessibilidade) {
+        this.acessibilidade = acessibilidade;
+    }
+
     public void setNumeroEstrelas(int numeroEstrelas) {this.numeroEstrelas = numeroEstrelas;}
+
+
 }

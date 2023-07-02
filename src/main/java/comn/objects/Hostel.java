@@ -2,6 +2,7 @@ package comn.objects;
 
 import comn.interfaces.slogan;
 import java.util.Arrays;
+import java.util.Objects;
 
 public class Hostel extends Acomodacao implements slogan {
 
@@ -16,7 +17,7 @@ Cozinha compartilhada: Indica se o hostel disponibiliza uma cozinha para os hós
 Wi-Fi: Indica se o hostel oferece acesso à internet sem fio para os hóspedes.
 Café da manhã: Indica se o hostel oferece café da manhã incluso na diária.
  */
-private Hostel[] listadeHostel;
+    private Hostel[] listadeHostel;
     private int nDormitoriosTotal;
 
     private int nDormitoriosDisponiveis;
@@ -27,7 +28,6 @@ private Hostel[] listadeHostel;
 
     private int quartosCompartilhados;
 
-    private String[] areasCompartilhadas;
 
 
     public Hostel() {
@@ -44,7 +44,7 @@ private Hostel[] listadeHostel;
         this.casaDeBanhoCompartilhada = casaDeBanhoCompartilhada;
         this.internet = internet;
         this.quartosCompartilhados = quartosCompartilhados;
-        this.areasCompartilhadas = areasCompartilhadas;
+
     }
 
     public Hostel(Acomodacao acomodacao, Hostel outroHostel) {
@@ -54,17 +54,24 @@ private Hostel[] listadeHostel;
         this.casaDeBanhoCompartilhada = outroHostel.getCasaDeBanhoCompartilhada();
         this.internet = outroHostel.getInternet();
         this.quartosCompartilhados = outroHostel.quartosCompartilhados;
-        this.areasCompartilhadas = outroHostel.areasCompartilhadas;
     }
 
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Hostel hostel)) return false;
+        if (!(o instanceof Hostel)) return false;
         if (!super.equals(o)) return false;
-        return getnDormitoriosTotal() == hostel.getnDormitoriosTotal() && getnDormitoriosDisponiveis() == hostel.getnDormitoriosDisponiveis() && getCasaDeBanhoCompartilhada() == hostel.getCasaDeBanhoCompartilhada() && getInternet() == hostel.getInternet() && getQuartosCompartilhados() == hostel.getQuartosCompartilhados() && Arrays.equals(getAreasCompartilhadas(), hostel.getAreasCompartilhadas());
+        Hostel hostel = (Hostel) o;
+        return getnDormitoriosTotal() == hostel.getnDormitoriosTotal() && getnDormitoriosDisponiveis() == hostel.getnDormitoriosDisponiveis() && getCasaDeBanhoCompartilhada() == hostel.getCasaDeBanhoCompartilhada() && getInternet() == hostel.getInternet() && getQuartosCompartilhados() == hostel.getQuartosCompartilhados() && Arrays.equals(getListadeHostel(), hostel.getListadeHostel());
     }
 
-
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(getnDormitoriosTotal(), getnDormitoriosDisponiveis(), getCasaDeBanhoCompartilhada(), getInternet(), getQuartosCompartilhados());
+        result = 31 * result + Arrays.hashCode(getListadeHostel());
+        return result;
+    }
 
     public void listar(){
         for (Hostel hostel : listadeHostel) {
@@ -74,8 +81,8 @@ private Hostel[] listadeHostel;
 
 
     //conceito de polimorfismo
-    public void descricao() {
-        System.out.println("Hostel");
+    public String descricao() {
+        return "Hotel";
     }
 
     //utilização da interface
@@ -145,11 +152,4 @@ private Hostel[] listadeHostel;
         this.listadeHostel = listadeHostel;
     }
 
-    public String[] getAreasCompartilhadas() {
-        return areasCompartilhadas;
-    }
-
-    public void setAreasCompartilhadas(String[] areasCompartilhadas) {
-        this.areasCompartilhadas = areasCompartilhadas;
-    }
 }
