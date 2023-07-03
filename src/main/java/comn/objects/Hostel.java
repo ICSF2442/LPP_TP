@@ -1,6 +1,12 @@
 package comn.objects;
 
+import comn.functions.Database;
 import comn.interfaces.slogan;
+
+import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -18,15 +24,9 @@ Wi-Fi: Indica se o hostel oferece acesso à internet sem fio para os hóspedes.
 Café da manhã: Indica se o hostel oferece café da manhã incluso na diária.
  */
     private Integer id;
-    private Hostel[] listadeHostel;
     private int nDormitoriosTotal;
-
-    private int nDormitoriosDisponiveis;
-
     private int casaDeBanhoCompartilhada;
-
     private int internet;
-
     private int quartosCompartilhados;
 
 
@@ -42,7 +42,7 @@ Café da manhã: Indica se o hostel oferece café da manhã incluso na diária.
     public Hostel(int id,int nDormitoriosTotal, int nDormitoriosDisponiveis, int casaDeBanhoCompartilhada, int internet, int quartosCompartilhados, String[] areasCompartilhadas) {
         this.nDormitoriosTotal = nDormitoriosTotal;
         this.id = id;
-        this.nDormitoriosDisponiveis = nDormitoriosDisponiveis;
+
         this.casaDeBanhoCompartilhada = casaDeBanhoCompartilhada;
         this.internet = internet;
         this.quartosCompartilhados = quartosCompartilhados;
@@ -52,41 +52,205 @@ Café da manhã: Indica se o hostel oferece café da manhã incluso na diária.
     public Hostel(Acomodacao acomodacao, Hostel outroHostel) {
         super(acomodacao);
         this.nDormitoriosTotal = outroHostel.getnDormitoriosTotal();
-        this.nDormitoriosDisponiveis = outroHostel.nDormitoriosDisponiveis;
         this.casaDeBanhoCompartilhada = outroHostel.getCasaDeBanhoCompartilhada();
         this.internet = outroHostel.getInternet();
         this.quartosCompartilhados = outroHostel.quartosCompartilhados;
     }
+    public Hostel(Integer id) throws SQLException, IOException {
+        if (id != null && Database.getConnection() != null) {
+            try {
+                Statement statement = Database.getConnection().createStatement();
+                ResultSet resultSet = statement.executeQuery("SELECT * FROM hostel WHERE id = " + id);
+
+                if (resultSet.next()) {
+                    this.id = resultSet.getInt("id");
+                    this.casaDeBanhoCompartilhada = resultSet.getInt("casaDeBanhoCompartilhada");
+                    this.internet = resultSet.getInt("internet");
+                    this.quartosCompartilhados = resultSet.getInt("quartosCompartilhados");
+                }
+
+                resultSet.close();
+                statement.close();
+            } catch (SQLException | IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public Object[] toArray() {
+        Object[] array = new Object[4];
+        array[0] = this.id;
+        array[1] = this.casaDeBanhoCompartilhada;
+        array[2] = this.internet;
+        array[3] = this.quartosCompartilhados;
+        return array;
+    }
+
+    public void store() {
+        String[] fields = {"id", "casaDeBanhoCompartilhada", "internet", "quartosCompartilhados"};
+
+        if (this.id == null) {
+            this.id = Database.getNextIncrement("hostel");
+
+            StringBuilder columns = new StringBuilder();
+            StringBuilder values = new StringBuilder();
+            for (String field : fields) {
+                columns.append(", ").append(field);
+                values.append(", ").append(this.getFieldValue(field) != null ? "'" + this.getFieldValue(field) + "'" : "NULL");
+            }
+
+            columns = new StringBuilder(columns.substring(2));
+            values = new StringBuilder(values.substring(2));
+            String sql = "INSERT INTO hostel (" + columns + ") VALUES (" + values + ");";
+
+            try {
+                Statement statement = Database.getConnection().createStatement();
+                statement.executeUpdate(sql);
+                statement.close();
+            } catch (SQLException | IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            StringBuilder values = new StringBuilder();
+            String sql = "UPDATE hostel SET ";
+            for (String field : fields) {
+                values.append(",").append(field).append(" = ").append(this.getFieldValue(field) != null ? "'" + this.getFieldValue(field) + "'" : "NULL");
+            }
+
+            values = new StringBuilder(values.substring(1));
+            sql = "UPDATE hostel SET " + values + " WHERE id = " + this.id;
+
+            try {
+                Statement statement = Database.getConnection().createStatement();
+                statement.executeUpdate(sql);
+                statement.close();
+            } catch (SQLException | IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static Hostel[] search(Integer id, Integer casaDeBanhoCompartilhada, Integer internet, Integer quartosCompartilhados) {
+        String sql = "SELECT id FROM hostel WHERE 1=1";
+
+        if (id != null) {
+            sql += " AND (id = " + id + ")";
+        }
+        if (casaDeBanhoCompartilhada != null) {
+            sql += " AND (casaDeBanhoCompartilhada = " + casaDeBanhoCompartilhada + ")";
+        }
+        if (internet != null) {
+            sql += " AND (internet = " + internet + ")";
+        }
+        if (quartosCompartilhados != null) {
+            sql += " AND (quartosCompartilhados = " + quartosCompartilhados + ")";
+        }
+
+        Hostel[] ret = null;
+
+        try {
+            Statement statement = Database.getConnection().createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            resultSet.last();
+            int rowCount = resultSet.getRow();
+            resultSet.beforeFirst();
+
+            if (rowCount > 0) {
+                ret = new Hostel[rowCount];
+                int index = 0;
+
+                while (resultSet.next()) {
+                    int hostelId = resultSet.getInt("id");
+                    ret[index] = new Hostel(hostelId);
+                    index++;
+                }
+            }
+
+            resultSet.close();
+            statement.close();
+        } catch (SQLException | IOException e) {
+            e.printStackTrace();
+        }
+
+        return ret;
+    }
+
+    public void remove() {
+        if (this.id != null) {
+            String sql = "DELETE FROM hostel WHERE id = " + this.id;
+
+            try {
+                Statement statement = Database.getConnection().createStatement();
+                statement.executeUpdate(sql);
+                statement.close();
+            } catch (SQLException | IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static int find(Integer id, Integer casaDeBanhoCompartilhada, Integer internet, Integer quartosCompartilhados) {
+        String sql = "SELECT id FROM hostel WHERE 1=1";
+
+        if (id != null) {
+            sql += " AND (id = " + id + ")";
+        }
+        if (casaDeBanhoCompartilhada != null) {
+            sql += " AND (casaDeBanhoCompartilhada = " + casaDeBanhoCompartilhada + ")";
+        }
+        if (internet != null) {
+            sql += " AND (internet = " + internet + ")";
+        }
+        if (quartosCompartilhados != null) {
+            sql += " AND (quartosCompartilhados = " + quartosCompartilhados + ")";
+        }
+
+        try {
+            Statement statement = Database.getConnection().createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+            int count = resultSet.next() ? 1 : 0;
+            resultSet.close();
+            statement.close();
+            return count;
+        } catch (SQLException | IOException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+    private Object getFieldValue(String fieldName) {
+        return switch (fieldName) {
+            case "id" -> this.id;
+            case "casaDeBanhoCompartilhada" -> this.casaDeBanhoCompartilhada;
+            case "internet" -> this.internet;
+            case "quartosCompartilhados" -> this.quartosCompartilhados;
+            default -> null;
+        };
+    }
+
 
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Hostel hostel)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-        return getnDormitoriosTotal() == hostel.getnDormitoriosTotal() && getnDormitoriosDisponiveis() == hostel.getnDormitoriosDisponiveis() && getCasaDeBanhoCompartilhada() == hostel.getCasaDeBanhoCompartilhada() && getInternet() == hostel.getInternet() && getQuartosCompartilhados() == hostel.getQuartosCompartilhados() && Arrays.equals(getListadeHostel(), hostel.getListadeHostel());
+        Hostel hostel = (Hostel) o;
+        return nDormitoriosTotal == hostel.nDormitoriosTotal && casaDeBanhoCompartilhada == hostel.casaDeBanhoCompartilhada && internet == hostel.internet && quartosCompartilhados == hostel.quartosCompartilhados && Objects.equals(id, hostel.id);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(getnDormitoriosTotal(), getnDormitoriosDisponiveis(), getCasaDeBanhoCompartilhada(), getInternet(), getQuartosCompartilhados());
-        result = 31 * result + Arrays.hashCode(getListadeHostel());
-        return result;
+        return Objects.hash(super.hashCode(), id, nDormitoriosTotal, casaDeBanhoCompartilhada, internet, quartosCompartilhados);
     }
-
-    public void listar(){
-        for (Hostel hostel : listadeHostel) {
-            hostel.print();
-        }
-    }
-
 
     //conceito de polimorfismo
     public String descricao() {
         return "Hotel";
     }
 
-    //utilização da interface
+    //utilização da ‘interface’
     @Override
     public String slogan(){
         return "Bem vindo á reserva de Hostel!";
@@ -96,7 +260,6 @@ Café da manhã: Indica se o hostel oferece café da manhã incluso na diária.
     public String toString() {
         return super.toString() +
                 "Numero de dormitorios: " + nDormitoriosTotal + "\n"+
-                "Numero de dormitorios disponiveis: " + nDormitoriosDisponiveis + "\n"+
                 "Casa de banho compartilhadas: " + casaDeBanhoCompartilhada + "\n"+
                 "Internet: " + internet + "\n"+
                 "Quartos compartilhados: " + quartosCompartilhados + "\n"+
@@ -111,14 +274,6 @@ Café da manhã: Indica se o hostel oferece café da manhã incluso na diária.
 
     public void setnDormitoriosTotal(int nDormitoriosTotal) {
         this.nDormitoriosTotal = nDormitoriosTotal;
-    }
-
-    public int getnDormitoriosDisponiveis() {
-        return nDormitoriosDisponiveis;
-    }
-
-    public void setnDormitoriosDisponiveis(int nDormitoriosDisponiveis) {
-        this.nDormitoriosDisponiveis = nDormitoriosDisponiveis;
     }
 
     public int getCasaDeBanhoCompartilhada() {
@@ -145,12 +300,13 @@ Café da manhã: Indica se o hostel oferece café da manhã incluso na diária.
         this.quartosCompartilhados = quartosCompartilhados;
     }
 
-    public Hostel[] getListadeHostel() {
-        return listadeHostel;
+    @Override
+    public Integer getId() {
+        return id;
     }
 
-    public void setListadeHostel(Hostel[] listadeHostel) {
-        this.listadeHostel = listadeHostel;
+    @Override
+    public void setId(Integer id) {
+        this.id = id;
     }
-
 }
