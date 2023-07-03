@@ -5,6 +5,7 @@ import comn.interfaces.slogan;
 import java.util.Arrays;
 
 public class HotelResort extends Hotel implements slogan {
+    private Integer id;
     private String[] atividades;
 
     public HotelResort() {

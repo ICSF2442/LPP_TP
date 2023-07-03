@@ -3,7 +3,7 @@ package comn.objects;
 import comn.interfaces.slogan;
 public class Apartamento extends Acomodacao implements slogan {
 
-
+    private Integer id;
 
     private int nQuartos;
 
@@ -37,8 +37,8 @@ public class Apartamento extends Acomodacao implements slogan {
         System.out.print("Cozinha incluída? ");
         System.out.print(getCozinha() == 1 ? "Sim" : "Não");
     }
-    public Apartamento(String nome, String endereco, int classificacao, double precoNoite, String descricao, int nQuartos, double areaTotal, int nCasaDeBanhos, int internet, int cozinha) {
-        super(nome, endereco, classificacao, precoNoite, descricao);
+    public Apartamento(int idAcomodacao, String nome, String endereco, int classificacao, double precoNoite, int nQuartos, double areaTotal, int nCasaDeBanhos, int internet, int cozinha) {
+        super(idAcomodacao, nome, endereco, classificacao, precoNoite);
         this.nQuartos = nQuartos;
         this.areaTotal = areaTotal;
         this.nCasaDeBanhos = nCasaDeBanhos;

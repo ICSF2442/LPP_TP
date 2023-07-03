@@ -17,6 +17,7 @@ Cozinha compartilhada: Indica se o hostel disponibiliza uma cozinha para os hós
 Wi-Fi: Indica se o hostel oferece acesso à internet sem fio para os hóspedes.
 Café da manhã: Indica se o hostel oferece café da manhã incluso na diária.
  */
+    private Integer id;
     private Hostel[] listadeHostel;
     private int nDormitoriosTotal;
 
@@ -38,8 +39,9 @@ Café da manhã: Indica se o hostel oferece café da manhã incluso na diária.
         super(acomodacao);
     }
 
-    public Hostel(int nDormitoriosTotal, int nDormitoriosDisponiveis, int casaDeBanhoCompartilhada, int internet, int quartosCompartilhados, String[] areasCompartilhadas) {
+    public Hostel(int id,int nDormitoriosTotal, int nDormitoriosDisponiveis, int casaDeBanhoCompartilhada, int internet, int quartosCompartilhados, String[] areasCompartilhadas) {
         this.nDormitoriosTotal = nDormitoriosTotal;
+        this.id = id;
         this.nDormitoriosDisponiveis = nDormitoriosDisponiveis;
         this.casaDeBanhoCompartilhada = casaDeBanhoCompartilhada;
         this.internet = internet;
@@ -60,9 +62,8 @@ Café da manhã: Indica se o hostel oferece café da manhã incluso na diária.
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Hostel)) return false;
+        if (!(o instanceof Hostel hostel)) return false;
         if (!super.equals(o)) return false;
-        Hostel hostel = (Hostel) o;
         return getnDormitoriosTotal() == hostel.getnDormitoriosTotal() && getnDormitoriosDisponiveis() == hostel.getnDormitoriosDisponiveis() && getCasaDeBanhoCompartilhada() == hostel.getCasaDeBanhoCompartilhada() && getInternet() == hostel.getInternet() && getQuartosCompartilhados() == hostel.getQuartosCompartilhados() && Arrays.equals(getListadeHostel(), hostel.getListadeHostel());
     }
 

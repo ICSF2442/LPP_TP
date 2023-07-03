@@ -16,15 +16,17 @@ Sobreposição dos métodos toString(), clone() e equals() herdados da classe Ob
 Método print() para imprimir os atributos.
 Método adicionarComodidade() para adicionar comodidades ao hotel.
      */
-
+    private Integer id;
     private String categoria;
     private int numeroEstrelas;
 
     private int acessibilidade;
 
 
-    public Hotel(String nome, String endereco, int classificacao, double precoNoite, String descricao, int numeroQuartos, int quartosDisponiveis, int numeroEstrelas) {
-        super(nome, endereco, classificacao, precoNoite, descricao);
+    public Hotel(int idAcomodacao, String nome, String endereco, int classificacao, double precoNoite, int acessibilidade, String categoria, int numeroEstrelas) {
+        super(idAcomodacao, nome, endereco, classificacao, precoNoite);
+        this.categoria = categoria;
+        this.acessibilidade = acessibilidade;
         this.numeroEstrelas = numeroEstrelas;
     }
 

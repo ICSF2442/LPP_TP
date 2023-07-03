@@ -302,10 +302,6 @@ public class main {
                 }
             }
         });
-
-
-
-
     }
 
     public void initializeCriarHotel(TextField nQuartosDisponiveisInsert, ChoiceBox<Integer> nEstrelasInsert, Button submeterHotel, TextField nQuartosInsert){

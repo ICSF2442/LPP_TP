@@ -36,7 +36,7 @@ public class Database {
         return connection;
     }
 
-    public static int getNextIncrement(String table, boolean commit) {
+    public static int getNextIncrement(String table) {
         try {
             Statement statement = getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery(
