@@ -5,9 +5,9 @@ package comn.objects;
 import comn.functions.Database;
 
 import java.io.IOException;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Arrays;
 import java.util.Objects;
 
 public class Acomodacao  {
@@ -17,7 +17,6 @@ public class Acomodacao  {
     private String endereco;
     private int classificacao;
     private double precoNoite;
-    private String[] comodidades;
 
 
     public Acomodacao(int id, String nome, String endereco, int classificacao, double precoNoite) {
@@ -26,7 +25,37 @@ public class Acomodacao  {
         this.endereco = endereco;
         this.classificacao = classificacao;
         this.precoNoite = precoNoite;
-        this.comodidades = new String[0];}
+    }
+    public Acomodacao(Integer id) throws SQLException, IOException {
+        if (id != null && Database.getConnection() != null) {
+            try {
+                Statement statement = Database.getConnection().createStatement();
+                ResultSet resultSet = statement.executeQuery("SELECT * FROM user WHERE id = " + id);
+
+                if (resultSet.next()) {
+                    this.id = resultSet.getInt("id");
+                    this.nome = resultSet.getString("nome");
+                    this.endereco = resultSet.getString("endereco");
+                    this.classificacao = resultSet.getInt("classificacao");
+                    this.precoNoite = resultSet.getDouble("precoNoite");
+                }
+
+                resultSet.close();
+                statement.close();
+            } catch (SQLException | IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    public Object[] toArray() {
+        Object[] array = new Object[5];
+        array[0] = this.id;
+        array[1] = this.nome;
+        array[2] = this.endereco;
+        array[3] = this.classificacao;
+        array[4] = this.precoNoite;
+        return array;
+    }
 
     public Acomodacao(Acomodacao acomodacao) {
         this.id = acomodacao.getId();
@@ -34,7 +63,6 @@ public class Acomodacao  {
         this.endereco = acomodacao.getEndereco();
         this.classificacao = acomodacao.getClassificacao();
         this.precoNoite = acomodacao.getPrecoNoite();
-        this.comodidades = acomodacao.getComodidades();
     }
     public void store() {
         String[] fields = {"id", "nome", "endereco", "classificacao", "precoNoite"};
@@ -80,6 +108,109 @@ public class Acomodacao  {
         }
     }
 
+    public static Acomodacao[] search(Integer id, String nome, String endereco, Integer classificacao, Double precoNoite) {
+        String sql = "SELECT id FROM acomodacao WHERE 1=1";
+
+        if (id != null) {
+            sql += " AND (id = " + id + ")";
+        }
+        if (nome != null) {
+            sql += " AND (nome = '" + nome + "')";
+        }
+        if (endereco != null) {
+            sql += " AND (endereco = '" + endereco + "')";
+        }
+        if (classificacao != null) {
+            sql += " AND (classificacao = " + classificacao + ")";
+        }
+        if (precoNoite != null) {
+            sql += " AND (precoNoite = " + precoNoite + ")";
+        }
+
+        Acomodacao[] ret = null;
+
+        try {
+            Statement statement = Database.getConnection().createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            resultSet.last();
+            int rowCount = resultSet.getRow();
+            resultSet.beforeFirst();
+
+            if (rowCount > 0) {
+                ret = new Acomodacao[rowCount];
+                int index = 0;
+
+                while (resultSet.next()) {
+                    int acomodacaoId = resultSet.getInt("id");
+                    ret[index] = new Acomodacao(acomodacaoId);
+                    index++;
+                }
+            }
+
+            resultSet.close();
+            statement.close();
+        } catch (SQLException | IOException e) {
+            e.printStackTrace();
+        }
+
+        return ret;
+    }
+    public void remove() {
+        if (this.id != null) {
+            String sql = "DELETE FROM user WHERE id = " + this.id;
+
+            try {
+                Statement statement = Database.getConnection().createStatement();
+                statement.executeUpdate(sql);
+                statement.close();
+            } catch (SQLException | IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    public static int find(Integer id, String username, String email, String password) {
+        String sql = "SELECT id FROM user WHERE 1=1";
+
+        if (id != null) {
+            sql += " AND (id = " + id + ")";
+        }
+        if (username != null) {
+            sql += " AND (username = '" + username + "')";
+        }
+        if (email != null) {
+            sql += " AND (email = '" + email + "')";
+        }
+        if (password != null) {
+            sql += " AND (password = '" + password + "')";
+        }
+
+        try {
+            Statement statement = Database.getConnection().createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+            int count = resultSet.next() ? 1 : 0;
+            resultSet.close();
+            statement.close();
+            return count;
+        } catch (SQLException | IOException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+    public static void remover(Integer id) {
+        if (id != null) {
+            String sql = "DELETE FROM user WHERE id = " + id;
+
+            try {
+                Statement statement = Database.getConnection().createStatement();
+                statement.executeUpdate(sql);
+                statement.close();
+            } catch (SQLException | IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     private Object getFieldValue(String fieldName) {
         return switch (fieldName) {
             case "id" -> this.id;
@@ -92,27 +223,12 @@ public class Acomodacao  {
     }
 
 
-    public Acomodacao() {
-        this.comodidades = new String[0];
-    }
+    public Acomodacao() {}
 
     /**
      * Adicionar comodidade á acomodaçao.
      */
-    public void adicionarComodidade(String comodidade){
-        if(getComodidades().length != 0){
-            String[] comodidades = new String[getComodidades().length+1];
-            for(int i = 0; i < getComodidades().length; i++){
-                comodidades[i] = getComodidades()[i];
-            }
-            comodidades[getComodidades().length] = comodidade;
-            setComodidades(comodidades);
-        }else {
-            String[] comodidades = new String[1];
-            comodidades[0] = comodidade;
-            setComodidades(comodidades);
-        }
-    }
+
     //conceito de polimorfismo
     public String descricao() {
         return "Acomodação genérica";
@@ -123,26 +239,20 @@ public class Acomodacao  {
         System.out.println("Endereco: " + this.endereco);
         System.out.println("Classificacao: " + this.classificacao);
         System.out.println("Preco: " + this.precoNoite);
-        System.out.println("Comodidades: ");
-        for(int i = 0; i < getComodidades().length; i++){
-            System.out.print(getComodidades()[i]);
-            System.out.println(" ");
-        }
     }
+
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Acomodacao that = (Acomodacao) o;
-        return classificacao == that.classificacao && Double.compare(that.precoNoite, precoNoite) == 0 && Objects.equals(id, that.id) && Objects.equals(nome, that.nome) && Objects.equals(endereco, that.endereco) && Arrays.equals(comodidades, that.comodidades);
+        return classificacao == that.classificacao && Double.compare(that.precoNoite, precoNoite) == 0 && Objects.equals(id, that.id) && Objects.equals(nome, that.nome) && Objects.equals(endereco, that.endereco);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(id, nome, endereco, classificacao, precoNoite);
-        result = 31 * result + Arrays.hashCode(comodidades);
-        return result;
+        return Objects.hash(id, nome, endereco, classificacao, precoNoite);
     }
 
     @Override
@@ -158,7 +268,6 @@ public class Acomodacao  {
                 "Classificação: " + classificacao + "\n"+
                 "PrecoNoite: " + precoNoite + "\n"+
                 "Descrição: " + descricao() + '\'' + "\n"+
-                "Coomodidades: " + Arrays.toString(comodidades) + "\n"+
                 "\n";}
 
 
@@ -194,15 +303,6 @@ public class Acomodacao  {
 
     public void setPrecoNoite(double precoNoite) {
         this.precoNoite = precoNoite;
-    }
-
-
-    public String[] getComodidades() {
-        return comodidades;
-    }
-
-    public void setComodidades(String[] comodidades) {
-        this.comodidades = comodidades;
     }
 
     public Integer getId() {

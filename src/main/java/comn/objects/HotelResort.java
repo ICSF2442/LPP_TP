@@ -6,58 +6,36 @@ import java.util.Arrays;
 
 public class HotelResort extends Hotel implements slogan {
     private Integer id;
-    private String[] atividades;
-
     public HotelResort() {
         super();
-        this.atividades = new String[0];
     }
 
-    public HotelResort(Acomodacao acomodacao, String[] atividades) {
+    public HotelResort(Acomodacao acomodacao){
         super(acomodacao);
-        this.atividades = new String[0];
     }
 
-    public HotelResort(Acomodacao acomodacao, String categoria, int acessibilidade, int numeroEstrelas, String[] atividades) {
+    public HotelResort(Acomodacao acomodacao, int id) {
+        super(acomodacao);
+        this.id = id;
+    }
+
+    public HotelResort(Acomodacao acomodacao, String categoria, int acessibilidade, int numeroEstrelas, int id) {
         super(acomodacao, categoria, acessibilidade, numeroEstrelas);
-        this.atividades = atividades;
+        this.id = id;
     }
 
     public HotelResort(Acomodacao acomodacao, Hotel outroHotel) {
         super(acomodacao, outroHotel);
-        this.atividades = new String[0];
     }
 
-    public void adicionarAtividade(String atividade){
-        if(getComodidades().length != 0){
-            String[] atividades = new String[getComodidades().length+1];
-            for(int i = 0; i < getComodidades().length; i++){
-                atividades[i] = getComodidades()[i];
-            }
-            atividades[getAtividades().length] = atividade;
-            setComodidades(atividades);
-        }else {
-            String[] ativades = new String[1];
-            atividades[0] = atividade;
-            setAtividades(atividades);
-        }
-    }
+
 
     @Override
     public String toString() {
         return super.toString() +
-                "Atividades=" + Arrays.toString(atividades) + "\n" +
                 "Slogan: " + slogan() + "\n" +
                 "Descrição: "+ descricao() + "\n"
                 ;
-    }
-
-    public String[] getAtividades() {
-        return atividades;
-    }
-
-    public void setAtividades(String[] atividades) {
-        this.atividades = atividades;
     }
 
     //conceito de polimorfismo
