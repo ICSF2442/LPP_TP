@@ -47,6 +47,13 @@ public class Acomodacao  {
             }
         }
     }
+    public Acomodacao(Acomodacao acomodacao) {
+        this.id = acomodacao.getId();
+        this.nome = acomodacao.getNome();
+        this.endereco = acomodacao.getEndereco();
+        this.classificacao = acomodacao.getClassificacao();
+        this.precoNoite = acomodacao.getPrecoNoite();
+    }
     public Object[] toArray() {
         Object[] array = new Object[5];
         array[0] = this.id;
@@ -57,13 +64,7 @@ public class Acomodacao  {
         return array;
     }
 
-    public Acomodacao(Acomodacao acomodacao) {
-        this.id = acomodacao.getId();
-        this.nome = acomodacao.getNome();
-        this.endereco = acomodacao.getEndereco();
-        this.classificacao = acomodacao.getClassificacao();
-        this.precoNoite = acomodacao.getPrecoNoite();
-    }
+
     public void store() {
         String[] fields = {"id", "nome", "endereco", "classificacao", "precoNoite"};
 
