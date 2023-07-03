@@ -17,9 +17,9 @@ public class HotelResort extends Hotel implements slogan {
         this.atividades = new String[0];
     }
 
-    public HotelResort(Acomodacao acomodacao, int numeroQuartos, int quartosDisponiveis, int numeroEstrelas) {
-        super(acomodacao, numeroQuartos, quartosDisponiveis, numeroEstrelas);
-        this.atividades = new String[0];
+    public HotelResort(Acomodacao acomodacao, String categoria, int acessibilidade, int numeroEstrelas, String[] atividades) {
+        super(acomodacao, categoria, acessibilidade, numeroEstrelas);
+        this.atividades = atividades;
     }
 
     public HotelResort(Acomodacao acomodacao, Hotel outroHotel) {

@@ -312,9 +312,7 @@ public class main {
         submeterHotel.setOnAction(new EventHandler<ActionEvent>(){
             @Override
             public void handle(ActionEvent actionEvent) {
-                hotel.setNumeroQuartos(Integer.parseInt(nQuartosInsert.getText()));
                 hotel.setNumeroEstrelas(Integer.parseInt(String.valueOf(nEstrelasInsert.getValue())));
-                hotel.setQuartosDisponiveis(Integer.parseInt(nQuartosDisponiveisInsert.getText()));
             }
         });
     }
