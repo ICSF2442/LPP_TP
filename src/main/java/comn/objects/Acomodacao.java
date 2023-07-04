@@ -30,7 +30,7 @@ public class Acomodacao  {
         if (id != null && Database.getConnection() != null) {
             try {
                 Statement statement = Database.getConnection().createStatement();
-                ResultSet resultSet = statement.executeQuery("SELECT * FROM user WHERE id = " + id);
+                ResultSet resultSet = statement.executeQuery("SELECT * FROM acomodacao WHERE id = " + id);
 
                 if (resultSet.next()) {
                     this.id = resultSet.getInt("id");
@@ -80,7 +80,7 @@ public class Acomodacao  {
 
             columns = new StringBuilder(columns.substring(2));
             values = new StringBuilder(values.substring(2));
-            String sql = "INSERT INTO USER (" + columns + ") VALUES (" + values + ");";
+            String sql = "INSERT INTO acomodacao (" + columns + ") VALUES (" + values + ");";
 
             try {
                 Statement statement = Database.getConnection().createStatement();
@@ -91,13 +91,13 @@ public class Acomodacao  {
             }
         } else {
             StringBuilder values = new StringBuilder();
-            String sql = "UPDATE USER SET ";
+            String sql = "UPDATE acomodacao SET ";
             for (String field : fields) {
                 values.append(",").append(field).append(" = ").append(this.getFieldValue(field) != null ? "'" + this.getFieldValue(field) + "'" : "NULL");
             }
 
             values = new StringBuilder(values.substring(1));
-            sql = "UPDATE user SET " + values + " WHERE id = " + this.id;
+            sql = "UPDATE acomodacao SET " + values + " WHERE id = " + this.id;
 
             try {
                 Statement statement = Database.getConnection().createStatement();
@@ -159,7 +159,7 @@ public class Acomodacao  {
     }
     public void remove() {
         if (this.id != null) {
-            String sql = "DELETE FROM user WHERE id = " + this.id;
+            String sql = "DELETE FROM acomodacao WHERE id = " + this.id;
 
             try {
                 Statement statement = Database.getConnection().createStatement();
@@ -170,20 +170,23 @@ public class Acomodacao  {
             }
         }
     }
-    public static int find(Integer id, String username, String email, String password) {
-        String sql = "SELECT id FROM user WHERE 1=1";
+    public static int find(Integer id, String nome, String endereco, Integer classificacao, Double precoNoite) {
+        String sql = "SELECT id FROM acomodacao WHERE 1=1";
 
         if (id != null) {
             sql += " AND (id = " + id + ")";
         }
-        if (username != null) {
-            sql += " AND (username = '" + username + "')";
+        if (nome != null) {
+            sql += " AND (username = '" + nome + "')";
         }
-        if (email != null) {
-            sql += " AND (email = '" + email + "')";
+        if (endereco != null) {
+            sql += " AND (email = '" + endereco + "')";
         }
-        if (password != null) {
-            sql += " AND (password = '" + password + "')";
+        if (classificacao != null) {
+            sql += " AND (password = '" + classificacao + "')";
+        }
+        if (precoNoite != null) {
+            sql += " AND (password = '" + precoNoite + "')";
         }
 
         try {
@@ -200,7 +203,7 @@ public class Acomodacao  {
     }
     public static void remover(Integer id) {
         if (id != null) {
-            String sql = "DELETE FROM user WHERE id = " + id;
+            String sql = "DELETE FROM acomodacao WHERE id = " + id;
 
             try {
                 Statement statement = Database.getConnection().createStatement();

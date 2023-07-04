@@ -1,5 +1,6 @@
 package com.example.projetolpp;
 import comn.main;
+import comn.objects.Acomodacao;
 import comn.objects.Apartamento;
 import comn.objects.Hostel;
 import comn.objects.Hotel;
@@ -17,25 +18,9 @@ public class Controlador {
     @FXML
     private Pane paneAcomodacao;
     @FXML
-    private ChoiceBox<Integer> classificacaoChoice;
-    @FXML
-    private TextField precoAcomodacao;
-    @FXML
-    private TextArea comodidadeInsert;
-    @FXML
-    private Button submeterComodidade;
-    @FXML
-    private Button submeterAcomodacao;
-    @FXML
-    private ChoiceBox tipoDeAcomodacao;
-    @FXML
-    private TextField enderecoAcomodacao;
-    @FXML
-    private TextField nomeAcomodacao;
-    @FXML
     private Label welcomeText;
     @FXML
-    private TextArea listagemAcomodacao;
+    private ListView<Acomodacao> listagemAcomodacao;
     @FXML
     private Button botaoHotel;
     @FXML
@@ -67,11 +52,6 @@ public class Controlador {
     @FXML
     protected void onHelloButtonClick() {
         welcomeText.setText("Welcome to JavaFX Application!");
-    }
-
-    @FXML
-    protected void onMostrarHoteis() {
-        listagemAcomodacao.setText(descriptionHotels.toString());
     }
 
     @FXML

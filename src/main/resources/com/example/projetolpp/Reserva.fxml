@@ -5,7 +5,7 @@
 <?import javafx.scene.text.*?>
 
 <Pane id="paneAcomodacao" fx:id="paneAcomodacao" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="636.0" prefWidth="897.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projetolpp.Controlador">
-    <Button id="botaoHotel" fx:id="botaoHotel" layoutX="22.0" layoutY="69.0" mnemonicParsing="false" onAction="#onMostrarHoteis" prefHeight="60.0" prefWidth="92.0" text="Hotel " />
+    <Button id="botaoHotel" fx:id="botaoHotel" layoutX="22.0" layoutY="69.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="92.0" text="Hotel " />
     <Button id="botaoHostel" fx:id="botaoHostel" layoutX="22.0" layoutY="145.0" mnemonicParsing="false" onAction="#onMostrarHosteis" prefHeight="60.0" prefWidth="92.0" text="Hostel" />
     <Button id="botaoApartamento" fx:id="botaoApartamento" layoutX="22.0" layoutY="221.0" mnemonicParsing="false" onAction="#onMostrarApartamentos" prefHeight="60.0" prefWidth="92.0" text="Apartamento" />
     <Text fill="WHITE" layoutX="14.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Acomodações:" wrappingWidth="300.0">
@@ -24,5 +24,5 @@
     <Button id="resortHotelbotao" fx:id="resortHotelbotao" layoutX="136.0" layoutY="104.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="56.0" text="Resort" />
    <ListView id="listagemAcomodacao" fx:id="listagemAcomodacao" layoutX="131.0" layoutY="155.0" prefHeight="347.0" prefWidth="749.0" />
    <Button id="remover" fx:id="remover" layoutX="164.0" layoutY="527.0" mnemonicParsing="false" onMouseClicked="#clicarAcomodacao" prefHeight="78.0" prefWidth="107.0" text="Remover" />
-   <Button id="remover" fx:id="remover1" layoutX="297.0" layoutY="527.0" mnemonicParsing="false" onMouseClicked="#clicarAcomodacao" prefHeight="78.0" prefWidth="107.0" text="Editar" />
+   <Button id="editar" fx:id="editar" layoutX="297.0" layoutY="527.0" mnemonicParsing="false" onMouseClicked="#clicarAcomodacao" prefHeight="78.0" prefWidth="107.0" text="Editar" />
 </Pane>

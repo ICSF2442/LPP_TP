@@ -1,32 +1,21 @@
 package comn;
 
-import com.example.projetolpp.Aplicacao;
 import comn.objects.*;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.skin.VirtualContainerBase;
-import javafx.scene.text.Text;
 
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.text.Normalizer;
+import java.util.Arrays;
 import java.util.Objects;
-import java.util.Vector;
 
 
 public class main {
@@ -78,36 +67,88 @@ public class main {
     public Button submeterHotel;
     public TextField nQuartosInsert;
 
-        public void initialize(TextArea listagemAcomodacao, Button botaoHotel, Button botaoHostel, Button botaoApartamento, Button normalHotelBotao, Button resortHotelBotao, Button criarAcomodacao, ButtonBar barraBotoes){
+        public void initialize(ListView<Acomodacao> listagemAcomodacao, Button botaoHotel, Button botaoHostel, Button botaoApartamento, Button normalHotelBotao, Button resortHotelBotao, Button criarAcomodacao, ButtonBar barraBotoes){
             acomodacao = new Acomodacao();
             hotel = new Hotel();
             hostel = new Hostel();
             apartamento = new Apartamento();
             hotelResort = new HotelResort();
             textoDaListagem = new StringBuilder();
+            ObservableList<Acomodacao> acomodacoes = FXCollections.observableArrayList();
+            ObservableList<Acomodacao> apartmentos = FXCollections.observableArrayList();
+            ObservableList<Acomodacao> hoteis = FXCollections.observableArrayList();
+            ObservableList<Acomodacao> resortHoteis = FXCollections.observableArrayList();
+            ObservableList<Acomodacao> hosteis = FXCollections.observableArrayList();
+
+            barraBotoes.setVisible(false);
+
+            Acomodacao[] ret = Acomodacao.search(null,null,null,null, null);
+            System.out.println(ret[0]);
+            acomodacoes.addAll(Arrays.asList(ret));
+            listagemAcomodacao.setItems(acomodacoes);
+            listagemAcomodacao.getItems();
+            System.out.println(ret[0]);
+
+
+
             //barraBotoes.setVisible(false);
             //listagemAcomodacao.setText("AAAAAAA");
+            listagemAcomodacao.setCellFactory(param -> new ListCell<Acomodacao>() {
+                @Override
+                protected void updateItem(Acomodacao item, boolean empty) {
+                    super.updateItem(item, empty);
+
+                    if (empty || item == null) {
+                        setText(null);
+                        setGraphic(null);
+                    } else {
+
+                        // Customize the cell based on the type of the object
+                        if (item instanceof Apartamento) {
+                            Apartamento apartamento = (Apartamento) item;
+                            setText(apartamento.toString());
+                            // Set other customization for Apartamento cell if needed
+                        }else if (item instanceof HotelResort) {
+                            HotelResort hotelResort = (HotelResort) item;
+                            setText(hotelResort.toString());
+                                // Set other customization for HotelResort cell if needed
+                        } else if (item instanceof Hotel) {
+                            Hotel hotel = (Hotel) item;
+                            setText(hotel.toString());
+                            // Set other customization for Hotel cell if needed
+                        } else if (item instanceof Hostel) {
+                            Hostel hostel = (Hostel) item;
+                            setText(hostel.toString());
+                            // Set other customization for Hostel cell if needed
+                        } else {
+                            Acomodacao acomodacao = (Acomodacao) item;
+                            setText(acomodacao.toString());
+                        }
+                    }
+                }
+            });
 
             botaoHotel.setOnAction(new EventHandler<ActionEvent>(){
                 @Override
                 public void handle(ActionEvent actionEvent) {
-                    barraBotoes.setVisible(true);
-                    obterListagemAcomodacao(1);
-                    listagemAcomodacao.setText(String.valueOf(textoDaListagem));
+                   Hotel[] hoteis1 = Hotel.search(null,null,null,null);
+                    hoteis.addAll(Arrays.asList(hoteis1));
+                    listagemAcomodacao.getItems().clear();
+                    listagemAcomodacao.setItems(hoteis);
                 }
             });
             botaoHostel.setOnAction(new EventHandler<ActionEvent>(){
                 @Override
                 public void handle(ActionEvent actionEvent) {
                     obterListagemAcomodacao(2);
-                    listagemAcomodacao.setText(String.valueOf(textoDaListagem));
+
                 }
             });
             botaoApartamento.setOnAction(new EventHandler<ActionEvent>(){
                 @Override
                 public void handle(ActionEvent actionEvent) {
                     obterListagemAcomodacao(3);
-                    listagemAcomodacao.setText(String.valueOf(textoDaListagem));
+
                 }
             });
 
@@ -131,14 +172,14 @@ public class main {
                 @Override
                 public void handle(ActionEvent actionEvent) {
                     obterListagemAcomodacao(4);
-                    listagemAcomodacao.setText(String.valueOf(textoDaListagem));
+
                 }
             });
             normalHotelBotao.setOnAction(new EventHandler<ActionEvent>(){
                 @Override
                 public void handle(ActionEvent actionEvent) {
                     obterListagemAcomodacao(1);
-                    listagemAcomodacao.setText(String.valueOf(textoDaListagem));
+
                 }
             });
 
@@ -239,10 +280,13 @@ public class main {
                     novaAcomodacao.store();
                     if(Objects.equals(tipoDeAcomodacao.getValue(), "Hotel")){
                         hotel = new Hotel(novaAcomodacao);
+                        Node node = (Node) actionEvent.getSource();
+                        Stage stage = (Stage) node.getScene().getWindow();
+                        stage.close();
                         try {
                             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/projetolpp/CriarHotel.fxml"));
                             Parent root1 = (Parent) fxmlLoader.load();
-                            Stage stage = new Stage();
+                            stage.setUserData(novaAcomodacao);
                             stage.setTitle("Criar Hotel");
                             stage.setScene(new Scene(root1));
                             stage.show();
@@ -296,10 +340,11 @@ public class main {
     }
 
     public void initializeCriarHotel(TextField nQuartosDisponiveisInsert, ChoiceBox<Integer> nEstrelasInsert, Button submeterHotel, TextField nQuartosInsert){
+        Hotel novoHotel = new Hotel();
         submeterHotel.setOnAction(new EventHandler<ActionEvent>(){
             @Override
             public void handle(ActionEvent actionEvent) {
-                hotel.setNumeroEstrelas(Integer.parseInt(String.valueOf(nEstrelasInsert.getValue())));
+                novoHotel.setNumeroEstrelas(Integer.parseInt(String.valueOf(nEstrelasInsert.getValue())));
             }
         });
     }

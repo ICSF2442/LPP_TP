@@ -25,11 +25,14 @@ public class Database {
         if (connection == null || !connection.isValid(0)) {
             try {
                 connection = DriverManager.getConnection(
-                        "jdbc:mysql://" + address + ":" + port + "/" + database + "?charset=" + charset,
+                        "jdbc:mariadb://" + address + ":" + port + "/" + database,
                         username,
                         password
                 );
+                System.out.println("jdbc:mariadb://" + address + ":" + port + "/" + database + "?charset=" + charset+","+username+","+ password);
             } catch (SQLException e) {
+                System.out.println("jdbc:mariadb://" + address + ":" + port + "/" + database + "?charset=" + charset+","+username+","+ password);
+
                 throw new IOException("Failed to connect to the database: " + address + ":" + port);
             }
         }
