@@ -84,7 +84,7 @@ public class main {
             hostel = new Hostel();
             apartamento = new Apartamento();
             hotelResort = new HotelResort();
-            textoDaListagem = new StringBuilder("");
+            textoDaListagem = new StringBuilder();
             //barraBotoes.setVisible(false);
             //listagemAcomodacao.setText("AAAAAAA");
 
@@ -150,64 +150,61 @@ public class main {
         }
 
     public void obterListagemAcomodacao(int tipo){
-        textoDaListagem = new StringBuilder("");
+        textoDaListagem = new StringBuilder();
 
-        switch (tipo){
-            case 1:
-                if(listadeHotel != null){
-                    for(Hotel hotel : listadeHotel){
+        switch (tipo) {
+            case 1 -> {
+                if (listadeHotel != null) {
+                    for (Hotel hotel : listadeHotel) {
                         textoDaListagem.append(hotel.toString());
                         textoDaListagem.append("\n");
                         textoDaListagem.append("------");
                         textoDaListagem.append("\n");
                     }
-                }else {
-                    textoDaListagem = new StringBuilder("");
+                } else {
+                    textoDaListagem = new StringBuilder();
                     textoDaListagem.append("\n");
                     textoDaListagem.append("--Nenhum hotel a apresentar--");
                     textoDaListagem.append("\n");
                 }
-                break;
-
-
-            case 2:
-                if(listadeHostel != null){
-                    for(Hostel hostel : listadeHostel){
+            }
+            case 2 -> {
+                if (listadeHostel != null) {
+                    for (Hostel hostel : listadeHostel) {
                         textoDaListagem.append(hostel.toString());
                     }
 
-                }else {
-                    textoDaListagem = new StringBuilder("");
+                } else {
+                    textoDaListagem = new StringBuilder();
                     textoDaListagem.append("\n");
                     textoDaListagem.append("--Nenhum hostel a apresentar--");
                     textoDaListagem.append("\n");
                 }
-                break;
-
-            case 3:
-                if(listadeApartamento != null){
-                    for(Apartamento apartamento : listadeApartamento){
+            }
+            case 3 -> {
+                if (listadeApartamento != null) {
+                    for (Apartamento apartamento : listadeApartamento) {
                         textoDaListagem.append(apartamento.toString());
                     }
-                }else {
-                    textoDaListagem = new StringBuilder("");
+                } else {
+                    textoDaListagem = new StringBuilder();
                     textoDaListagem.append("\n");
                     textoDaListagem.append("--Nenhum apartamento a apresentar--");
                     textoDaListagem.append("\n");
                 }
-                break;
-
-            case 4:
-                if(listadeHotelResort != null){
-                    for(HotelResort hotelResort : listadeHotelResort){
+            }
+            case 4 -> {
+                if (listadeHotelResort != null) {
+                    for (HotelResort hotelResort : listadeHotelResort) {
                         textoDaListagem.append(hotelResort.toString());
                     }
-                }else{
-                    textoDaListagem = new StringBuilder("");
+                } else {
+                    textoDaListagem = new StringBuilder();
                     textoDaListagem.append("\n");
                     textoDaListagem.append("--Nenhum Hotel Resort a apresentar--");
                     textoDaListagem.append("\n");
                 }
+            }
         }
     }
 
@@ -222,13 +219,13 @@ public class main {
 
     public void initializeCriarAcomodacao(TextField nomeAcomodacao, TextField enderecoAcomodacao, ChoiceBox<Integer> classificacaoChoice, TextField precoAcomodacao, TextField comodidadeInsert, Button submeterComodidade, Button submeterAcomodacao, ChoiceBox<String> tipoDeAcomodacao, TextArea comodidadeList){
             acomodacao = new Acomodacao();
-            StringBuilder listaComodidades = new StringBuilder("");
+            StringBuilder listaComodidades = new StringBuilder();
             Acomodacao novaAcomodacao = new Acomodacao();
 
         submeterComodidade.setOnAction(new EventHandler<ActionEvent>(){
             @Override
             public void handle(ActionEvent actionEvent) {
-               novaAcomodacao.adicionarComodidade(comodidadeInsert.getText());
+
                listaComodidades.append(comodidadeInsert.getText());
                comodidadeList.setText(String.valueOf(listaComodidades));
                listaComodidades.append(", ");

@@ -1,34 +1,26 @@
 package comn.objects;
 
 import comn.functions.Database;
-import comn.interfaces.slogan;
 
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Arrays;
 
-public class HotelResort extends Hotel implements slogan {
+public class Comodidade {
+
     private Integer id;
 
-    public HotelResort() {
+    private String nome;
+
+    public Comodidade() {
     }
 
-    public HotelResort(Acomodacao acomodacao, Hotel outroHotel) {
-        super(acomodacao, outroHotel);
-    }
-
-    public HotelResort(Acomodacao acomodacao, Integer id) {
-        super(acomodacao);
-        this.id = id;
-    }
-
-    public HotelResort(Integer id) throws SQLException, IOException {
+    public Comodidade(Integer id) throws SQLException, IOException {
         this.id = id;
 
         if (id != null && Database.getConnection() != null) {
-            String sql = "SELECT * FROM hotelresort WHERE id = " + id;
+            String sql = "SELECT * FROM comodidade WHERE id = " + id;
 
             try {
                 Statement statement = Database.getConnection().createStatement();
@@ -37,6 +29,7 @@ public class HotelResort extends Hotel implements slogan {
                 if (resultSet.next()) {
                     // Retrieve data from the result set and assign it to the class properties
                     this.id = resultSet.getInt("id");
+                    this.nome = resultSet.getString("nome");
                 }
 
                 resultSet.close();
@@ -55,11 +48,19 @@ public class HotelResort extends Hotel implements slogan {
         this.id = id;
     }
 
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
     public void store() {
-        String[] fields = { "id" };
+        String[] fields = { "id", "nome" };
 
         if (this.id == null) {
-            this.id = Database.getNextIncrement("hotelresort");
+            this.id = Database.getNextIncrement("comodidade");
 
             StringBuilder columns = new StringBuilder();
             StringBuilder values = new StringBuilder();
@@ -70,7 +71,7 @@ public class HotelResort extends Hotel implements slogan {
 
             columns = new StringBuilder(columns.substring(2));
             values = new StringBuilder(values.substring(2));
-            String sql = "INSERT INTO hotelresort (" + columns + ") VALUES (" + values + ")";
+            String sql = "INSERT INTO comodidade (" + columns + ") VALUES (" + values + ")";
 
             try {
                 Statement statement = Database.getConnection().createStatement();
@@ -81,13 +82,13 @@ public class HotelResort extends Hotel implements slogan {
             }
         } else {
             StringBuilder values = new StringBuilder();
-            String sql = "UPDATE hotelresort SET ";
+            String sql = "UPDATE comodidade SET ";
             for (String field : fields) {
                 values.append(",").append(field).append(" = ").append(this.getFieldValue(field) != null ? "'" + this.getFieldValue(field) + "'" : "NULL");
             }
 
             values = new StringBuilder(values.substring(1));
-            sql = "UPDATE hotelresort SET " + values + " WHERE id = " + this.id;
+            sql = "UPDATE comodidade SET " + values + " WHERE id = " + this.id;
 
             try {
                 Statement statement = Database.getConnection().createStatement();
@@ -101,7 +102,7 @@ public class HotelResort extends Hotel implements slogan {
 
     public void remove() {
         if (this.id != null) {
-            String sql = "DELETE FROM hotelresort WHERE id = " + this.id;
+            String sql = "DELETE FROM comodidade WHERE id = " + this.id;
 
             try {
                 Statement statement = Database.getConnection().createStatement();
@@ -113,14 +114,17 @@ public class HotelResort extends Hotel implements slogan {
         }
     }
 
-    public static HotelResort[] search(Integer id) {
-        String sql = "SELECT id FROM hotelresort WHERE 1=1";
+    public static Comodidade[] search(Integer id, String nome) {
+        String sql = "SELECT id FROM comodidade WHERE 1=1";
 
         if (id != null) {
             sql += " AND id = " + id;
         }
+        if (nome != null) {
+            sql += " AND nome = '" + nome + "'";
+        }
 
-        HotelResort[] result = null;
+        Comodidade[] result = null;
 
         try {
             Statement statement = Database.getConnection().createStatement();
@@ -131,12 +135,12 @@ public class HotelResort extends Hotel implements slogan {
             resultSet.beforeFirst();
 
             if (rowCount > 0) {
-                result = new HotelResort[rowCount];
+                result = new Comodidade[rowCount];
                 int index = 0;
 
                 while (resultSet.next()) {
-                    int hotelResortId = resultSet.getInt("id");
-                    result[index] = new HotelResort(hotelResortId);
+                    int comodidadeId = resultSet.getInt("id");
+                    result[index] = new Comodidade(comodidadeId);
                     index++;
                 }
             }
@@ -150,43 +154,11 @@ public class HotelResort extends Hotel implements slogan {
         return result;
     }
 
-    public static void remover(Integer id) {
-        if (id != null) {
-            String sql = "DELETE FROM hotelresort WHERE id = " + id;
-
-            try {
-                Statement statement = Database.getConnection().createStatement();
-                statement.executeUpdate(sql);
-                statement.close();
-            } catch (SQLException | IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
     private Object getFieldValue(String fieldName) {
         return switch (fieldName) {
             case "id" -> this.id;
+            case "nome" -> this.nome;
             default -> null;
         };
-    }
-
-    @Override
-    public String toString() {
-        return super.toString() +
-                "Slogan: " + slogan() + "\n" +
-                "Descrição: "+ descricao() + "\n"
-                ;
-    }
-
-    //conceito de polimorfismo
-    public String descricao() {
-        return "HotelResort";
-    }
-    //utilização da classe abstrata
-
-    @Override
-    public String slogan(){
-        return "Bem vindo á reserva de HotelResort!";
     }
 }
