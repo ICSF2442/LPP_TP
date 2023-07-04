@@ -24,7 +24,6 @@ Método adicionarComodidade() para adicionar comodidades ao hotel.
     private Integer id;
     private String categoria;
     private int numeroEstrelas;
-
     private int acessibilidade;
 
     public Hotel(Integer id) throws SQLException, IOException {

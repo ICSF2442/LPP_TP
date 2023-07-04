@@ -4,36 +4,25 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane id="paneAcomodacao" fx:id="paneAcomodacao" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-      minWidth="-Infinity" prefHeight="502.0" prefWidth="722.0" style="-fx-background-color: black;"
-      xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.example.projetolpp.Controlador">
-    <Button id="botaoHotel" fx:id="botaoHotel" layoutX="22.0" layoutY="69.0" mnemonicParsing="false"
-            onAction="#onMostrarHoteis" prefHeight="60.0" prefWidth="92.0" text="Hotel "/>
-    <Button id="botaoHostel" fx:id="botaoHostel" layoutX="22.0" layoutY="145.0" mnemonicParsing="false"
-            onAction="#onMostrarHosteis" prefHeight="60.0" prefWidth="92.0" text="Hostel"/>
-    <Button id="botaoApartamento" fx:id="botaoApartamento" layoutX="22.0" layoutY="221.0" mnemonicParsing="false"
-            onAction="#onMostrarApartamentos" prefHeight="60.0" prefWidth="92.0" text="Apartamento"/>
-    <Text fill="WHITE" layoutX="14.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reservas:"
-          wrappingWidth="300.0">
+<Pane id="paneAcomodacao" fx:id="paneAcomodacao" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="636.0" prefWidth="897.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projetolpp.Controlador">
+    <Button id="botaoHotel" fx:id="botaoHotel" layoutX="22.0" layoutY="69.0" mnemonicParsing="false" onAction="#onMostrarHoteis" prefHeight="60.0" prefWidth="92.0" text="Hotel " />
+    <Button id="botaoHostel" fx:id="botaoHostel" layoutX="22.0" layoutY="145.0" mnemonicParsing="false" onAction="#onMostrarHosteis" prefHeight="60.0" prefWidth="92.0" text="Hostel" />
+    <Button id="botaoApartamento" fx:id="botaoApartamento" layoutX="22.0" layoutY="221.0" mnemonicParsing="false" onAction="#onMostrarApartamentos" prefHeight="60.0" prefWidth="92.0" text="Apartamento" />
+    <Text fill="WHITE" layoutX="14.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Acomodações:" wrappingWidth="300.0">
         <font>
-          <Font size="26.0"/>
+          <Font size="26.0" />
         </font>
     </Text>
-    <ButtonBar id="barraBotoes" fx:id="barraBotoes" layoutX="443.0" layoutY="49.0" prefHeight="40.0" prefWidth="200.0">
-        <buttons>
-          <Button id="normalHotelBotao" fx:id="normalHotelBotao" mnemonicParsing="false" text="Normal"/>
-          <Button id="resortHotelbotao" fx:id="resortHotelbotao" mnemonicParsing="false" text="Resort"/>
-        </buttons>
-    </ButtonBar>
-    <Text fill="WHITE" layoutX="412.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tipo de hotel"
-          textAlignment="CENTER" visible="false" wrappingWidth="300.0">
+    <ButtonBar id="barraBotoes" fx:id="barraBotoes" layoutX="443.0" layoutY="49.0" prefHeight="40.0" prefWidth="200.0" />
+    <Text fill="WHITE" layoutX="412.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tipo de hotel" textAlignment="CENTER" visible="false" wrappingWidth="300.0">
         <font>
-          <Font size="18.0"/>
+          <Font size="18.0" />
         </font>
     </Text>
-    <Button id="criarAcomodacao" fx:id="criarAcomodacao" layoutX="164.0" layoutY="69.0" mnemonicParsing="false"
-            onMouseClicked="#clicarAcomodacao" prefHeight="78.0" prefWidth="114.0" text="Criar Acomodacao"/>
-    <TextArea id="listagemAcomodacao" fx:id="listagemAcomodacao" editable="false" layoutX="134.0" layoutY="172.0"
-              prefHeight="303.0" prefWidth="566.0"/>
+    <Button id="criarAcomodacao" fx:id="criarAcomodacao" layoutX="28.0" layoutY="527.0" mnemonicParsing="false" onMouseClicked="#clicarAcomodacao" prefHeight="78.0" prefWidth="114.0" text="Criar Acomodacao" />
+    <Button id="normalHotelBotao" fx:id="normalHotelBotao" layoutX="136.0" layoutY="69.0" mnemonicParsing="false" text="Normal" />
+    <Button id="resortHotelbotao" fx:id="resortHotelbotao" layoutX="136.0" layoutY="104.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="56.0" text="Resort" />
+   <ListView id="listagemAcomodacao" fx:id="listagemAcomodacao" layoutX="131.0" layoutY="155.0" prefHeight="347.0" prefWidth="749.0" />
+   <Button id="remover" fx:id="remover" layoutX="164.0" layoutY="527.0" mnemonicParsing="false" onMouseClicked="#clicarAcomodacao" prefHeight="78.0" prefWidth="107.0" text="Remover" />
+   <Button id="remover" fx:id="remover1" layoutX="297.0" layoutY="527.0" mnemonicParsing="false" onMouseClicked="#clicarAcomodacao" prefHeight="78.0" prefWidth="107.0" text="Editar" />
 </Pane>

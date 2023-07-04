@@ -88,11 +88,6 @@ public class main {
             //barraBotoes.setVisible(false);
             //listagemAcomodacao.setText("AAAAAAA");
 
-/*
- *
- *
- *
- */
             botaoHotel.setOnAction(new EventHandler<ActionEvent>(){
                 @Override
                 public void handle(ActionEvent actionEvent) {
@@ -226,7 +221,6 @@ public class main {
             @Override
             public void handle(ActionEvent actionEvent) {
 
-               listaComodidades.append(comodidadeInsert.getText());
                comodidadeList.setText(String.valueOf(listaComodidades));
                listaComodidades.append(", ");
                comodidadeInsert.setText("");
@@ -242,7 +236,7 @@ public class main {
                     novaAcomodacao.setClassificacao(classificacaoChoice.getValue());
                     novaAcomodacao.setPrecoNoite(Double.parseDouble(precoAcomodacao.getText()));
                     novaAcomodacao.setEndereco(enderecoAcomodacao.getText());
-                    acomodacao = novaAcomodacao;
+                    novaAcomodacao.store();
                     if(Objects.equals(tipoDeAcomodacao.getValue(), "Hotel")){
                         hotel = new Hotel(novaAcomodacao);
                         try {

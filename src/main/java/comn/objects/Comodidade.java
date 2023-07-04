@@ -3,9 +3,7 @@ package comn.objects;
 import comn.functions.Database;
 
 import java.io.IOException;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class Comodidade {
 
@@ -160,5 +158,20 @@ public class Comodidade {
             case "nome" -> this.nome;
             default -> null;
         };
+    }
+
+    public void addComodidadeAcomodacao(int comodidadeId, int acomodacaoId) {
+        String sql = "INSERT INTO comodidade_acomodacao (comodidade_FK, acomodacao_FK) VALUES (?, ?)";
+
+        try {
+            Connection connection = Database.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, comodidadeId);
+            statement.setInt(2, acomodacaoId);
+            statement.executeUpdate();
+            statement.close();
+        } catch (SQLException | IOException e) {
+            e.printStackTrace();
+        }
     }
 }

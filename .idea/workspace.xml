@@ -6,9 +6,15 @@
   <component name="ChangeListManager">
     <list default="true" id="ce383701-ca86-4590-a462-cda330fe785e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/projetolpp/Reserva.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/comn/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comn/main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/comn/objects/HotelResort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comn/objects/HotelResort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/comn/objects/Atividade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comn/objects/Atividade.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/comn/objects/Comodidade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comn/objects/Comodidade.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/comn/objects/Hostel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comn/objects/Hostel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/comn/objects/Hotel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comn/objects/Hotel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/projetolpp/CriaAcomodacao.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/projetolpp/CriaAcomodacao.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/projetolpp/CriarHostel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/projetolpp/CriarHostel.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/projetolpp/CriarHotel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/projetolpp/CriarHotel.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/projetolpp/Reserva.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/projetolpp/Reserva.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +57,7 @@
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;proofread&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -120,7 +126,9 @@
       <updated>1686953496443</updated>
       <workItem from="1688297481814" duration="52000" />
       <workItem from="1688392825132" duration="13407000" />
-      <workItem from="1688492679779" duration="1499000" />
+      <workItem from="1688492679779" duration="1979000" />
+      <workItem from="1688494679565" duration="26000" />
+      <workItem from="1688494715498" duration="4667000" />
     </task>
     <servers />
   </component>

@@ -3,9 +3,8 @@ package comn.objects;
 import comn.functions.Database;
 
 import java.io.IOException;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+
 public class Atividade {
 
     private Integer id;
@@ -169,5 +168,21 @@ public class Atividade {
             case "nome" -> this.nome;
             default -> null;
         };
+    }
+
+    public static void addHotelResortAtividade(int hotelResortId, int atividadeId) {
+        String sql = "INSERT INTO hotelResort_atividade (hotelResort_FK, atividade_FK) VALUES (?, ?)";
+
+        try (Connection connection = Database.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setInt(1, hotelResortId);
+            statement.setInt(2, atividadeId);
+
+            statement.executeUpdate();
+
+        } catch (IOException | SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

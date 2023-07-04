@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="462.0" prefWidth="589.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projetolpp.Controlador2">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="462.0" prefWidth="589.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projetolpp.Controlador2">
    <Text fill="WHITE" layoutX="150.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Criação de Acomodação" textAlignment="CENTER">
       <font>
          <Font size="23.0" />
@@ -48,5 +48,5 @@
    <Button id="submeterComodidade" fx:id="submeterComodidade" layoutX="434.0" layoutY="236.0" mnemonicParsing="false" text="Submeter" />
    <Button id="submeterAcomodacao" fx:id="submeterAcomodacao" alignment="CENTER" contentDisplay="CENTER" layoutX="222.0" layoutY="405.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="150.0" text="Proximo passo" />
    <ChoiceBox id="tipoDeAcomodacao" fx:id="tipoDeAcomodacao" layoutX="14.0" layoutY="131.0" prefWidth="150.0" />
-   <TextField id="comodidadeInsert" fx:id="comodidadeInsert" layoutX="270.0" layoutY="236.0" />
+   <ChoiceBox id="comodidadeInsert" fx:id="comodidadeInsert" layoutX="274.0" layoutY="236.0" prefWidth="150.0" />
 </Pane>
