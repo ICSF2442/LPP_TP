@@ -113,6 +113,7 @@ public class HotelResort extends Hotel implements slogan {
         }
     }
 
+
     public static HotelResort[] search(Integer id) {
         String sql = "SELECT id FROM hotelresort WHERE 1=1";
 

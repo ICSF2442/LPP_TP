@@ -253,13 +253,16 @@ Café da manhã: Indica se o hostel oferece café da manhã incluso na diária.
 
     @Override
     public String toString() {
-        return super.toString() +
-                "Casa de banho compartilhadas: " + casaDeBanhoCompartilhada + "\n"+
-                "Internet: " + internet + "\n"+
-                "Quartos compartilhados: " + quartosCompartilhados + "\n"+
-                "Slogan: "+ slogan() + "\n"+
-                "Descrição: "+ descricao() + "\n";
+        String casaDeBanho = (casaDeBanhoCompartilhada == 1) ? "Sim" : "Nao";
+        String internetStatus = (internet == 1) ? "Sim" : "Nao";
+        String quartosCompartilhadosStatus = (quartosCompartilhados == 1) ? "Sim" : "Nao";
 
+        return super.toString() +
+                "Casa de banho compartilhadas: " + casaDeBanho + "\n" +
+                "Internet: " + internetStatus + "\n" +
+                "Quartos compartilhados: " + quartosCompartilhadosStatus + "\n" +
+                "Slogan: " + slogan() + "\n" +
+                "Descrição: " + descricao() + "\n";
     }
 
     public int getCasaDeBanhoCompartilhada() {

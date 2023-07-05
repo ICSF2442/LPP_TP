@@ -67,8 +67,11 @@ public class main {
     public Button submeterHotel;
     public TextField nQuartosInsert;
 
+    public String[] listaDeComodidades;
+
         public void initialize(ListView<Acomodacao> listagemAcomodacao, Button botaoHotel, Button botaoHostel, Button botaoApartamento, Button normalHotelBotao, Button resortHotelBotao, Button criarAcomodacao, ButtonBar barraBotoes){
             acomodacao = new Acomodacao();
+            listaDeComodidades = new String[0];
             hotel = new Hotel();
             hostel = new Hostel();
             apartamento = new Apartamento();
@@ -79,7 +82,8 @@ public class main {
             ObservableList<Acomodacao> hoteis = FXCollections.observableArrayList();
             ObservableList<Acomodacao> resortHoteis = FXCollections.observableArrayList();
             ObservableList<Acomodacao> hosteis = FXCollections.observableArrayList();
-
+            normalHotelBotao.setVisible(false);
+            resortHotelBotao.setVisible(false);
             barraBotoes.setVisible(false);
 
             Acomodacao[] ret = Acomodacao.search(null,null,null,null, null);
@@ -129,25 +133,46 @@ public class main {
             });
 
             botaoHotel.setOnAction(new EventHandler<ActionEvent>(){
+
                 @Override
                 public void handle(ActionEvent actionEvent) {
+                    normalHotelBotao.setVisible(true);
+                    resortHotelBotao.setVisible(true);
                    Hotel[] hoteis1 = Hotel.search(null,null,null,null);
-                    hoteis.addAll(Arrays.asList(hoteis1));
-                    listagemAcomodacao.getItems().clear();
-                    listagemAcomodacao.setItems(hoteis);
+                   if(hoteis1 != null){
+                       hoteis.addAll(Arrays.asList(hoteis1));
+                       listagemAcomodacao.getItems().clear();
+                       listagemAcomodacao.setItems(hoteis);
+                   }
+
                 }
             });
             botaoHostel.setOnAction(new EventHandler<ActionEvent>(){
                 @Override
                 public void handle(ActionEvent actionEvent) {
-                    obterListagemAcomodacao(2);
+                    normalHotelBotao.setVisible(false);
+                    resortHotelBotao.setVisible(false);
+                    Hostel[] hosteis1 = Hostel.search(null,null,null,null);
+                    if(hosteis1 != null){
+                        hosteis.addAll(Arrays.asList(hosteis1));
+                        listagemAcomodacao.getItems().clear();
+                        listagemAcomodacao.setItems(hosteis);
+                    }
 
                 }
+
             });
             botaoApartamento.setOnAction(new EventHandler<ActionEvent>(){
                 @Override
                 public void handle(ActionEvent actionEvent) {
-                    obterListagemAcomodacao(3);
+                    normalHotelBotao.setVisible(false);
+                    resortHotelBotao.setVisible(false);
+                    Apartamento[] apartamentos1 = Apartamento.search(null,null,null,null,null,null);
+                    if(apartamentos1 != null){
+                        apartmentos.addAll(Arrays.asList(apartamentos1));
+                        listagemAcomodacao.getItems().clear();
+                        listagemAcomodacao.setItems(apartmentos);
+                    }
 
                 }
             });
@@ -171,89 +196,55 @@ public class main {
             resortHotelBotao.setOnAction(new EventHandler<ActionEvent>(){
                 @Override
                 public void handle(ActionEvent actionEvent) {
-                    obterListagemAcomodacao(4);
+                    normalHotelBotao.setVisible(true);
+                    resortHotelBotao.setVisible(true);
+                    HotelResort[] hoteisResort1 = (HotelResort[]) HotelResort.search(null,null,null,null);
+                    if(hoteisResort1 != null){
+                        resortHoteis.addAll(Arrays.asList(hoteisResort1));
+                        listagemAcomodacao.getItems().clear();
+                        listagemAcomodacao.setItems(resortHoteis);
+                    }
 
                 }
             });
             normalHotelBotao.setOnAction(new EventHandler<ActionEvent>(){
                 @Override
                 public void handle(ActionEvent actionEvent) {
-                    obterListagemAcomodacao(1);
-
+                    normalHotelBotao.setVisible(true);
+                    resortHotelBotao.setVisible(true);
+                    Hotel[] hoteis1 = Hotel.search(null,null,null,null);
+                    if(hoteis1 != null){
+                        hoteis.addAll(Arrays.asList(hoteis1));
+                        listagemAcomodacao.getItems().clear();
+                        listagemAcomodacao.setItems(hoteis);
+                    }
                 }
             });
 
         }
 
-    public void obterListagemAcomodacao(int tipo){
-        textoDaListagem = new StringBuilder();
+    public void addComodidade(String comodidade) {
+        // Create a new array with increased size
+        if(listaDeComodidades != null){
+            String[] newArray = new String[listaDeComodidades.length + 1];
 
-        switch (tipo) {
-            case 1 -> {
-                if (listadeHotel != null) {
-                    for (Hotel hotel : listadeHotel) {
-                        textoDaListagem.append(hotel.toString());
-                        textoDaListagem.append("\n");
-                        textoDaListagem.append("------");
-                        textoDaListagem.append("\n");
-                    }
-                } else {
-                    textoDaListagem = new StringBuilder();
-                    textoDaListagem.append("\n");
-                    textoDaListagem.append("--Nenhum hotel a apresentar--");
-                    textoDaListagem.append("\n");
-                }
-            }
-            case 2 -> {
-                if (listadeHostel != null) {
-                    for (Hostel hostel : listadeHostel) {
-                        textoDaListagem.append(hostel.toString());
-                    }
+            // Copy existing elements to the new array
+            System.arraycopy(listaDeComodidades, 0, newArray, 0, listaDeComodidades.length);
 
-                } else {
-                    textoDaListagem = new StringBuilder();
-                    textoDaListagem.append("\n");
-                    textoDaListagem.append("--Nenhum hostel a apresentar--");
-                    textoDaListagem.append("\n");
-                }
-            }
-            case 3 -> {
-                if (listadeApartamento != null) {
-                    for (Apartamento apartamento : listadeApartamento) {
-                        textoDaListagem.append(apartamento.toString());
-                    }
-                } else {
-                    textoDaListagem = new StringBuilder();
-                    textoDaListagem.append("\n");
-                    textoDaListagem.append("--Nenhum apartamento a apresentar--");
-                    textoDaListagem.append("\n");
-                }
-            }
-            case 4 -> {
-                if (listadeHotelResort != null) {
-                    for (HotelResort hotelResort : listadeHotelResort) {
-                        textoDaListagem.append(hotelResort.toString());
-                    }
-                } else {
-                    textoDaListagem = new StringBuilder();
-                    textoDaListagem.append("\n");
-                    textoDaListagem.append("--Nenhum Hotel Resort a apresentar--");
-                    textoDaListagem.append("\n");
-                }
-            }
+            // Add the new value to the end of the new array
+            newArray[newArray.length - 1] = comodidade;
+
+            // Update the reference to the new array
+            listaDeComodidades = newArray;
+        }else{
+            listaDeComodidades = new String[1];
+            listaDeComodidades[0] = comodidade;
         }
+
     }
 
-    public void aumentarListaHotel(Hotel hotel) {
-        if (listadeHotel.length > 0) {
-            Hotel[] hoteis = new Hotel[listadeHotel.length + 1];
-            System.arraycopy(listadeHotel, 0, hoteis, 0, listadeHotel.length);
-            hoteis[listadeHotel.length] = hotel;
-            listadeHotel = hoteis;
-        }
-    }
 
-    public void initializeCriarAcomodacao(TextField nomeAcomodacao, TextField enderecoAcomodacao, ChoiceBox<Integer> classificacaoChoice, TextField precoAcomodacao, TextField comodidadeInsert, Button submeterComodidade, Button submeterAcomodacao, ChoiceBox<String> tipoDeAcomodacao, TextArea comodidadeList){
+    public void initializeCriarAcomodacao(TextField nomeAcomodacao, TextField enderecoAcomodacao, ChoiceBox<Integer> classificacaoChoice, TextField precoAcomodacao, ChoiceBox<String> comodidadeInsert, Button submeterComodidade, Button submeterAcomodacao, ChoiceBox<String> tipoDeAcomodacao, TextArea comodidadeList){
             acomodacao = new Acomodacao();
             StringBuilder listaComodidades = new StringBuilder();
             Acomodacao novaAcomodacao = new Acomodacao();
@@ -262,10 +253,13 @@ public class main {
             @Override
             public void handle(ActionEvent actionEvent) {
 
-               comodidadeList.setText(String.valueOf(listaComodidades));
-               listaComodidades.append(", ");
-               comodidadeInsert.setText("");
-               comodidadeList.setText(String.valueOf(listaComodidades));
+                if(!Objects.equals(comodidadeInsert.getValue(), "Não há comodidades a apresentar.") && !Objects.equals(comodidadeInsert.getValue(),null) && !Objects.equals(comodidadeInsert.getValue(),"")){
+                    listaComodidades.append(comodidadeInsert.getValue());
+                    listaComodidades.append(", ");
+                    comodidadeList.setText(String.valueOf(listaComodidades));
+                    addComodidade(comodidadeInsert.getValue());
+                }
+
             }
         });
 
@@ -273,11 +267,16 @@ public class main {
             @Override
             public void handle(ActionEvent actionEvent) {
                 if(nomeAcomodacao.getText() != null && enderecoAcomodacao.getText() != null && classificacaoChoice.getValue() != null && precoAcomodacao.getText() != null && tipoDeAcomodacao.getValue() != null ){
+
                     novaAcomodacao.setNome(nomeAcomodacao.getText());
                     novaAcomodacao.setClassificacao(classificacaoChoice.getValue());
                     novaAcomodacao.setPrecoNoite(Double.parseDouble(precoAcomodacao.getText()));
                     novaAcomodacao.setEndereco(enderecoAcomodacao.getText());
                     novaAcomodacao.store();
+                    for (String listaDeComodidade : listaDeComodidades) {
+                        Comodidade[] ret = Comodidade.search(null,listaDeComodidade);
+                        ret[0].addComodidadeAcomodacao(ret[0].getId(),novaAcomodacao.getId());
+                    }
                     if(Objects.equals(tipoDeAcomodacao.getValue(), "Hotel")){
                         hotel = new Hotel(novaAcomodacao);
                         Node node = (Node) actionEvent.getSource();
