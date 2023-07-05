@@ -28,7 +28,7 @@
 
 
       <Button id="submeterHotel" fx:id="submeterHotel" layoutX="491.0" layoutY="336.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="89.0" text="Submeter" />
-      <CheckBox layoutX="279.0" layoutY="179.0" mnemonicParsing="false" text="Acessibilidade" textFill="WHITE">
+      <CheckBox id="acessibilidadeCheck" fx:id="acessibilidadeCheck" layoutX="279.0" layoutY="179.0" mnemonicParsing="false" text="Acessibilidade" textFill="WHITE">
          <font>
             <Font size="17.0" />
          </font>

@@ -5,9 +5,7 @@ package comn.objects;
 import comn.functions.Database;
 
 import java.io.IOException;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.Objects;
 
 public class Acomodacao  {
@@ -63,6 +61,22 @@ public class Acomodacao  {
         array[4] = this.precoNoite;
         return array;
     }
+    public void updateAcomodacaoSubclasse(String subclassName, int acomodacaoId, int newSubclasse) {
+        String sql = "UPDATE "+ subclassName +" SET acomodacao_FK = ? WHERE id = ?";
+
+        try {
+            Connection connection = Database.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, acomodacaoId);
+            statement.setInt(2, newSubclasse);
+            statement.executeUpdate();
+            statement.close();
+        } catch (SQLException | IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
 
     public void store() {

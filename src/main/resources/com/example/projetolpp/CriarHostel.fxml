@@ -6,15 +6,18 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projetolpp.ControladorHostel">
    <children>
-      <Text fill="WHITE" layoutX="213.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Criação de Hostel ">
+      <Button fx:id="botaoSubmeter" layoutX="467.0" layoutY="331.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="104.0" text="Submeter" />
+      <CheckBox fx:id="casaDeBanhoCheck" layoutX="158.0" layoutY="135.0" mnemonicParsing="false" text="Casa de banho compartilhada" textFill="WHITE">
          <font>
-            <Font size="20.0" />
+            <Font size="18.0" />
          </font>
-      </Text>
-      <Text fill="WHITE" layoutX="115.0" layoutY="312.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nº areas compartilhados:" />
-      <TextField layoutX="271.0" layoutY="295.0" promptText="Nº areasCompartilhadas" />
-      <Button layoutX="425.0" layoutY="335.0" mnemonicParsing="false" text="Submeter" />
-      <CheckBox layoutX="158.0" layoutY="145.0" mnemonicParsing="false" text="Casa de banho compartilhada" textFill="WHITE">
+      </CheckBox>
+      <CheckBox fx:id="InternetCheck" layoutX="158.0" layoutY="187.0" mnemonicParsing="false" text="Internet" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </CheckBox>
+      <CheckBox fx:id="quartosCompartilhadosCheck" layoutX="158.0" layoutY="237.0" mnemonicParsing="false" text="Quartos compartilhados" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>

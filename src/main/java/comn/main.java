@@ -85,13 +85,13 @@ public class main {
             normalHotelBotao.setVisible(false);
             resortHotelBotao.setVisible(false);
             barraBotoes.setVisible(false);
-
             Acomodacao[] ret = Acomodacao.search(null,null,null,null, null);
-            System.out.println(ret[0]);
-            acomodacoes.addAll(Arrays.asList(ret));
-            listagemAcomodacao.setItems(acomodacoes);
-            listagemAcomodacao.getItems();
-            System.out.println(ret[0]);
+            if(ret != null){
+                acomodacoes.addAll(Arrays.asList(ret));
+                listagemAcomodacao.setItems(acomodacoes);
+                listagemAcomodacao.getItems();
+            }
+
 
 
 
@@ -278,7 +278,6 @@ public class main {
                         ret[0].addComodidadeAcomodacao(ret[0].getId(),novaAcomodacao.getId());
                     }
                     if(Objects.equals(tipoDeAcomodacao.getValue(), "Hotel")){
-                        hotel = new Hotel(novaAcomodacao);
                         Node node = (Node) actionEvent.getSource();
                         Stage stage = (Stage) node.getScene().getWindow();
                         stage.close();
@@ -294,12 +293,14 @@ public class main {
                         }
                     }
                     if(Objects.equals(tipoDeAcomodacao.getValue(), "Hotel Resort")){
+                        Node node = (Node) actionEvent.getSource();
+                        Stage stage = (Stage) node.getScene().getWindow();
                         Hotel novoHotel = new Hotel(novaAcomodacao);
                         hotelResort = new HotelResort(novaAcomodacao, novoHotel);
                         try {
                             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/projetolpp/CriarHotelResort.fxml"));
+                            stage.setUserData(novaAcomodacao);
                             Parent root1 = (Parent) fxmlLoader.load();
-                            Stage stage = new Stage();
                             stage.setTitle("Criar Acomodacao");
                             stage.setScene(new Scene(root1));
                             stage.show();
@@ -311,8 +312,10 @@ public class main {
                         apartamento = new Apartamento(novaAcomodacao);
                         try {
                             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/projetolpp/CriarApartamento.fxml"));
+                            Node node = (Node) actionEvent.getSource();
+                            Stage stage = (Stage) node.getScene().getWindow();
                             Parent root1 = (Parent) fxmlLoader.load();
-                            Stage stage = new Stage();
+                            stage.setUserData(novaAcomodacao);
                             stage.setTitle("Criar Acomodacao");
                             stage.setScene(new Scene(root1));
                             stage.show();
@@ -324,8 +327,10 @@ public class main {
                         hostel = new Hostel(novaAcomodacao);
                         try {
                             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/projetolpp/CriarHostel.fxml"));
+                            Node node = (Node) actionEvent.getSource();
+                            Stage stage = (Stage) node.getScene().getWindow();
                             Parent root1 = (Parent) fxmlLoader.load();
-                            Stage stage = new Stage();
+                            stage.setUserData(novaAcomodacao);
                             stage.setTitle("Criar Acomodacao");
                             stage.setScene(new Scene(root1));
                             stage.show();
@@ -338,14 +343,43 @@ public class main {
         });
     }
 
-    public void initializeCriarHotel(TextField nQuartosDisponiveisInsert, ChoiceBox<Integer> nEstrelasInsert, Button submeterHotel, TextField nQuartosInsert){
-        Hotel novoHotel = new Hotel();
+    public void initializeCriarHotel(CheckBox acessibilidadeCheck, ChoiceBox<Integer> nEstrelasInsert, Button submeterHotel, TextField categoriaText){
         submeterHotel.setOnAction(new EventHandler<ActionEvent>(){
             @Override
             public void handle(ActionEvent actionEvent) {
+                Node node = (Node) actionEvent.getSource();
+                Stage stage = (Stage) node.getScene().getWindow();
+                Acomodacao u = (Acomodacao) stage.getUserData();
+                Hotel novoHotel = new Hotel(u);
+                if(acessibilidadeCheck.isSelected()) novoHotel.setAcessibilidade(1);
+                novoHotel.setCategoria(categoriaText.getText());
                 novoHotel.setNumeroEstrelas(Integer.parseInt(String.valueOf(nEstrelasInsert.getValue())));
+                novoHotel.store();
+                novoHotel.updateAcomodacaoSubclasse("hotel",u.getId(),novoHotel.getId());
             }
         });
+    }
+
+    public void initializeCriarHostel(CheckBox casaBanho, CheckBox internet, CheckBox quartos, Button botao){
+        botao.setOnAction(new EventHandler<ActionEvent>(){
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                Node node = (Node) actionEvent.getSource();
+                Stage stage = (Stage) node.getScene().getWindow();
+                Acomodacao u = (Acomodacao) stage.getUserData();
+                Hostel novoHostel = new Hostel(u);
+                System.out.println(novoHostel.getPrecoNoite());
+                if(casaBanho.isSelected()) novoHostel.setCasaDeBanhoCompartilhada(1);
+                if(internet.isSelected()) novoHostel.setInternet(1);
+                if(quartos.isSelected()) novoHostel.setQuartosCompartilhados(1);
+                novoHostel.store();
+                novoHostel.updateAcomodacaoSubclasse("hostel",u.getId(),novoHostel.getId());
+            }
+        });
+    }
+
+    public void initializeCriarHostel(){
+
     }
 
     public StringBuilder getTextoDaListagem() {
