@@ -222,10 +222,12 @@ public class Acomodacao  {
     }
     public static void remover(Integer id) {
         if (id != null) {
+            String sql2 = "DELETE FROM comodidade_acomodacao WHERE acomodacao_fk ="+ id;
             String sql = "DELETE FROM acomodacao WHERE id = " + id;
 
             try {
                 Statement statement = Database.getConnection().createStatement();
+                statement.executeUpdate(sql2);
                 statement.executeUpdate(sql);
                 statement.close();
             } catch (SQLException | IOException e) {

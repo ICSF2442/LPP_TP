@@ -17,6 +17,10 @@ public class HotelResort extends Hotel implements slogan {
     public HotelResort() {
     }
 
+    public HotelResort(Acomodacao acomodacao) {
+        super(acomodacao);
+    }
+
     public HotelResort(Acomodacao acomodacao, Hotel outroHotel) {
         super(acomodacao, outroHotel);
     }

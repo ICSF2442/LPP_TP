@@ -42,16 +42,20 @@ public class main {
 
                 @Override
                 public void handle(ActionEvent actionEvent) {
+
                     Acomodacao selectedItem = listagemAcomodacaoGlobal.getSelectionModel().getSelectedItem();
                     if (selectedItem != null) {
-                        if (Hotel.find(null, null, null, null, selectedItem.getId()) == 1) {
-                            Hotel[] ret = Hotel.search(null, null, null, null, selectedItem.getId());
+
+                        if (Hotel.find(selectedItem.getId(), (String) null, (Integer) null, null, null) == 1) {
                             selectedItem.remove();
-                            ret[0].remove();
+
+
+                            Acomodacao.remover(selectedItem.getId());
                             Hotel[] hoteis1 = Hotel.search((Integer) null, (String) null, (Integer) null,null,null);
                             listagemAcomodacaoGlobal.getItems().clear();
                             hoteis.clear();
                             if(hoteis1 != null){
+
 
                                 hoteis.addAll(Arrays.asList(hoteis1));
                                 if (!hoteis.isEmpty()) {
@@ -60,7 +64,7 @@ public class main {
                                 }
                             }
                         }
-                        if (Hostel.find(null, null, null, null, selectedItem.getId()) == 1) {
+                        if (Hostel.find(selectedItem.getId(), (Integer) null, null, null,null) == 1) {
                             Hostel[] ret = Hostel.search(null, null, null, null, selectedItem.getId());
                             selectedItem.remove();
                             ret[0].remove();
@@ -280,25 +284,6 @@ public class main {
         }
 
     }
-    public void addAtividade(String atividade) {
-        // Create a new array with increased size
-        if(listaDeAtividades != null){
-            String[] newArray = new String[listaDeAtividades.length + 1];
-
-            // Copy existing elements to the new array
-            System.arraycopy(listaDeAtividades, 0, newArray, 0, listaDeAtividades.length);
-
-            // Add the new value to the end of the new array
-            newArray[newArray.length - 1] = atividade;
-
-            // Update the reference to the new array
-            listaDeAtividades = newArray;
-        }else{
-            listaDeAtividades = new String[1];
-            listaDeAtividades[0] = atividade;
-        }
-
-    }
 
 
     public void initializeCriarAcomodacao(TextField nomeAcomodacao, TextField enderecoAcomodacao, ChoiceBox<Integer> classificacaoChoice, TextField precoAcomodacao, ChoiceBox<String> comodidadeInsert, Button submeterComodidade, Button submeterAcomodacao, ChoiceBox<String> tipoDeAcomodacao, TextArea comodidadeList){
@@ -444,21 +429,64 @@ public class main {
         });
     }
 
+    public void addAtividade(String atividade) {
+        // Create a new array with increased size
+        if(listaDeAtividades != null){
+            String[] newArray = new String[listaDeAtividades.length + 1];
+
+            // Copy existing elements to the new array
+            System.arraycopy(listaDeAtividades, 0, newArray, 0, listaDeAtividades.length);
+
+            // Add the new value to the end of the new array
+            newArray[newArray.length - 1] = atividade;
+
+            // Update the reference to the new array
+            listaDeAtividades = newArray;
+        }else{
+            listaDeAtividades = new String[1];
+            listaDeAtividades[0] = atividade;
+        }
+
+    }
+
+
 
     public void initializeCriarHotelResort(TextField listaAtividade, Button adicionarAtividade, ChoiceBox<String> insertAtividades, Button botao){
-        botao.setOnAction(new EventHandler<ActionEvent>(){
+          StringBuilder listaAtividadess = new StringBuilder();
+            adicionarAtividade.setOnAction(new EventHandler<ActionEvent>(){
+            @Override
+            public void handle(ActionEvent actionEvent) {
+
+                if(!Objects.equals(insertAtividades.getValue(), "Não há atividades a apresentar.") && !Objects.equals(insertAtividades.getValue(),null) && !Objects.equals(insertAtividades.getValue(),"")){
+                    listaAtividadess.append(insertAtividades.getValue());
+                    listaAtividadess.append(", ");
+                    listaAtividade.setText(String.valueOf(listaAtividadess));
+                    addAtividade(insertAtividades.getValue());
+                }
+            }
+        });
+
+
+
+            botao.setOnAction(new EventHandler<ActionEvent>(){
             @Override
             public void handle(ActionEvent actionEvent) {
 
                 Node node = (Node) actionEvent.getSource();
                 Stage stage = (Stage) node.getScene().getWindow();
                 Acomodacao u = (Acomodacao) stage.getUserData();
-                Hostel novoHostel = new Hostel(u);
-                System.out.println(novoHostel.getPrecoNoite());
+                Hotel novoH = new Hotel(u);
+                HotelResort novoResort = new HotelResort(novoH);
 
+                if(listaDeAtividades != null){
+                    for (String listaDeAtividade : listaDeAtividades) {
+                        Atividade[] ret = Atividade.search(null,listaDeAtividade);
+                        ret[0].addHotelResortAtividade(ret[0].getId(),novoResort.getId());
+                    }
+                }
 
-                novoHostel.store();
-                novoHostel.updateAcomodacaoSubclasse("hostel",u.getId(),novoHostel.getId());
+                novoResort.store();
+                novoResort.updateAcomodacaoSubclasse("HotelResort",u.getId(),novoResort.getId());
 
                 stage.close();
             }

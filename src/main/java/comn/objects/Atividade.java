@@ -169,7 +169,7 @@ public class Atividade {
         };
     }
 
-    public static void addHotelResortAtividade(int hotelResortId, int atividadeId) {
+    public void addHotelResortAtividade(int hotelResortId, int atividadeId) {
         String sql = "INSERT INTO hotelResort_atividade (hotelResort_FK, atividade_FK) VALUES (?, ?)";
 
         try (Connection connection = Database.getConnection();

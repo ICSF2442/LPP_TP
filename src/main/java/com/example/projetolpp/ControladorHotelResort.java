@@ -25,8 +25,9 @@ public class ControladorHotelResort {
             for (Atividade atividade : ret) {
                 insertAtividades.getItems().add(atividade.getNome());
             }
+            insertAtividades.getItems().add("");
         }else {
-            insertAtividades.getItems().add("Não há comodidades a apresentar.");
+            insertAtividades.getItems().add("Não há atividades a apresentar.");
         }
     }
 }
