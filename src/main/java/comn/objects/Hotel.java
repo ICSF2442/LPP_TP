@@ -5,9 +5,7 @@ import comn.functions.Database;
 import comn.interfaces.slogan;
 
 import java.io.IOException;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.Objects;
 
 public class Hotel extends Acomodacao implements slogan {
@@ -25,9 +23,12 @@ Método adicionarComodidade() para adicionar comodidades ao hotel.
     private String categoria;
     private int numeroEstrelas;
     private int acessibilidade;
+    private int acomodacao_fk;
 
     public Hotel(Integer id) throws SQLException, IOException {
+        super(getAcomodacaoId(id));
         if (id != null && Database.getConnection() != null) {
+
             try {
                 Statement statement = Database.getConnection().createStatement();
                 ResultSet resultSet = statement.executeQuery("SELECT * FROM hotel WHERE id = " + id);
@@ -37,6 +38,8 @@ Método adicionarComodidade() para adicionar comodidades ao hotel.
                     this.categoria = resultSet.getString("categoria");
                     this.numeroEstrelas = resultSet.getInt("numeroEstrelas");
                     this.acessibilidade = resultSet.getInt("acessibilidade");
+                    this.acomodacao_fk = resultSet.getInt("acomodacao_fk");
+
                 }
 
                 resultSet.close();
@@ -47,11 +50,48 @@ Método adicionarComodidade() para adicionar comodidades ao hotel.
         }
     }
 
+    private static Integer getAcomodacaoId(Integer hotelId) throws SQLException, IOException {
+        Integer acomodacaoId = null;
+
+        if (hotelId != null && Database.getConnection() != null) {
+            try {
+                Statement statement = Database.getConnection().createStatement();
+                ResultSet resultSet = statement.executeQuery("SELECT acomodacao_fk FROM hotel WHERE id = " + hotelId);
+
+                if (resultSet.next()) {
+                    acomodacaoId = resultSet.getInt("acomodacao_fk");
+                }
+
+                resultSet.close();
+                statement.close();
+            } catch (SQLException | IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return acomodacaoId;
+    }
+
     public Hotel(int idAcomodacao, String nome, String endereco, int classificacao, double precoNoite, int acessibilidade, String categoria, int numeroEstrelas) {
         super(idAcomodacao, nome, endereco, classificacao, precoNoite);
         this.categoria = categoria;
         this.acessibilidade = acessibilidade;
         this.numeroEstrelas = numeroEstrelas;
+    }
+
+    public void updateHotelSubclasse(String subclassName, int hotelId, int newSubclasse) {
+        String sql = "UPDATE "+ subclassName +" SET hotel_FK = ? WHERE id = ?";
+
+        try {
+            Connection connection = Database.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, hotelId);
+            statement.setInt(2, newSubclasse);
+            statement.executeUpdate();
+            statement.close();
+        } catch (SQLException | IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -287,6 +327,14 @@ Método adicionarComodidade() para adicionar comodidades ao hotel.
     }
 
     public void setNumeroEstrelas(int numeroEstrelas) {this.numeroEstrelas = numeroEstrelas;}
+
+    public int getAcomodacao_fk() {
+        return acomodacao_fk;
+    }
+
+    public void setAcomodacao_fk(int acomodacao_fk) {
+        this.acomodacao_fk = acomodacao_fk;
+    }
 
     @Override
     public Integer getId() {

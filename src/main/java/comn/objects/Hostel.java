@@ -28,6 +28,8 @@ Café da manhã: Indica se o hostel oferece café da manhã incluso na diária.
     private int internet;
     private int quartosCompartilhados;
 
+    private int acomodacao_fk;
+
 
 
     public Hostel() {
@@ -53,6 +55,7 @@ Café da manhã: Indica se o hostel oferece café da manhã incluso na diária.
         this.quartosCompartilhados = outroHostel.quartosCompartilhados;
     }
     public Hostel(Integer id) throws SQLException, IOException {
+        super(getAcomodacaoId(id));
         if (id != null && Database.getConnection() != null) {
             try {
                 Statement statement = Database.getConnection().createStatement();
@@ -63,6 +66,8 @@ Café da manhã: Indica se o hostel oferece café da manhã incluso na diária.
                     this.casaDeBanhoCompartilhada = resultSet.getInt("casaDeBanhoCompartilhada");
                     this.internet = resultSet.getInt("internet");
                     this.quartosCompartilhados = resultSet.getInt("quartosCompartilhados");
+                    this.acomodacao_fk = resultSet.getInt("acomodacao_fk");
+
                 }
 
                 resultSet.close();
@@ -71,6 +76,28 @@ Café da manhã: Indica se o hostel oferece café da manhã incluso na diária.
                 e.printStackTrace();
             }
         }
+    }
+
+    private static Integer getAcomodacaoId(Integer hostelId) throws SQLException, IOException {
+        Integer acomodacaoId = null;
+
+        if (hostelId != null && Database.getConnection() != null) {
+            try {
+                Statement statement = Database.getConnection().createStatement();
+                ResultSet resultSet = statement.executeQuery("SELECT acomodacao_fk FROM hostel WHERE id = " + hostelId);
+
+                if (resultSet.next()) {
+                    acomodacaoId = resultSet.getInt("acomodacao_fk");
+                }
+
+                resultSet.close();
+                statement.close();
+            } catch (SQLException | IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return acomodacaoId;
     }
 
     public Object[] toArray() {

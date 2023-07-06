@@ -378,10 +378,6 @@ public class main {
         });
     }
 
-    public void initializeCriarHostel(){
-
-    }
-
     public StringBuilder getTextoDaListagem() {
         return textoDaListagem;
     }

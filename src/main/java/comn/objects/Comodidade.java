@@ -15,7 +15,7 @@ public class Comodidade {
     }
 
     public Comodidade(Integer id) throws SQLException, IOException {
-        this.id = id;
+
 
         if (id != null && Database.getConnection() != null) {
             String sql = "SELECT * FROM comodidade WHERE id = " + id;

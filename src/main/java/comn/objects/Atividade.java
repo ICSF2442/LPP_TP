@@ -12,7 +12,6 @@ public class Atividade {
     private String nome;
 
     public Atividade(Integer id) throws SQLException, IOException {
-        this.id = id;
 
         if (id != null && Database.getConnection() != null) {
             String sql = "SELECT * FROM atividade WHERE id = " + id;

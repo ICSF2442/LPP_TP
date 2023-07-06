@@ -12,6 +12,8 @@ import java.util.Arrays;
 public class HotelResort extends Hotel implements slogan {
     private Integer id;
 
+    private int hotel_fk;
+
     public HotelResort() {
     }
 
@@ -25,7 +27,7 @@ public class HotelResort extends Hotel implements slogan {
     }
 
     public HotelResort(Integer id) throws SQLException, IOException {
-        this.id = id;
+        super(getHotelId(id));
 
         if (id != null && Database.getConnection() != null) {
             String sql = "SELECT * FROM hotelresort WHERE id = " + id;
@@ -37,6 +39,8 @@ public class HotelResort extends Hotel implements slogan {
                 if (resultSet.next()) {
                     // Retrieve data from the result set and assign it to the class properties
                     this.id = resultSet.getInt("id");
+                    this.hotel_fk = resultSet.getInt("hotel_fk");
+
                 }
 
                 resultSet.close();
@@ -45,6 +49,27 @@ public class HotelResort extends Hotel implements slogan {
                 e.printStackTrace();
             }
         }
+    }
+
+    private static Integer getHotelId(Integer hotelresortId) throws SQLException, IOException {
+        Integer hotelId = null;
+
+        if (hotelresortId != null && Database.getConnection() != null) {
+            try {
+                Statement statement = Database.getConnection().createStatement();
+                ResultSet resultSet = statement.executeQuery("SELECT hotel_fk FROM hotelresort WHERE id = " + hotelresortId);
+
+                if (resultSet.next()) {
+                    hotelId = resultSet.getInt("hotel_fk");
+                }
+
+                resultSet.close();
+                statement.close();
+            } catch (SQLException | IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return hotelId;
     }
 
     public Integer getId() {

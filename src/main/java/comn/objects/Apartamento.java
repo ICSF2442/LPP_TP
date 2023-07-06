@@ -22,19 +22,26 @@ public class Apartamento extends Acomodacao implements slogan {
 
     private int cozinha;
 
+    private int acomodacao_fk;
+
     public Apartamento(Integer id) throws SQLException, IOException {
+        super(getAcomodacaoId(id));
+
         if (id != null && Database.getConnection() != null) {
             try {
                 Statement statement = Database.getConnection().createStatement();
                 ResultSet resultSet = statement.executeQuery("SELECT * FROM apartamento WHERE id = " + id);
 
                 if (resultSet.next()) {
+
                     this.id = resultSet.getInt("id");
                     this.nQuartos = resultSet.getInt("nQuartos");
                     this.areaTotal = resultSet.getDouble("areaTotal");
                     this.nCasaDeBanhos = resultSet.getInt("nCasaDeBanhos");
                     this.internet = resultSet.getInt("internet");
                     this.cozinha = resultSet.getInt("cozinha");
+                    this.acomodacao_fk = resultSet.getInt("acomodacao_fk");
+
                 }
 
                 resultSet.close();
@@ -43,6 +50,28 @@ public class Apartamento extends Acomodacao implements slogan {
                 e.printStackTrace();
             }
         }
+    }
+
+    private static Integer getAcomodacaoId(Integer apartamentoId) throws SQLException, IOException {
+        Integer acomodacaoId = null;
+
+        if (apartamentoId != null && Database.getConnection() != null) {
+            try {
+                Statement statement = Database.getConnection().createStatement();
+                ResultSet resultSet = statement.executeQuery("SELECT acomodacao_fk FROM apartamento WHERE id = " + apartamentoId);
+
+                if (resultSet.next()) {
+                    acomodacaoId = resultSet.getInt("acomodacao_fk");
+                }
+
+                resultSet.close();
+                statement.close();
+            } catch (SQLException | IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return acomodacaoId;
     }
 
     public Object[] toArray() {
