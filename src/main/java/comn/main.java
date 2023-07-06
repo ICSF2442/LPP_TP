@@ -10,77 +10,25 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-
 import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Objects;
 
 
 public class main {
-    private TextArea comodidadeList;
-
-    private Acomodacao acomodacao;
-
-    private Hotel hotel;
-
-    private Hostel hostel;
-
-    private Apartamento apartamento;
-
-    private HotelResort hotelResort;
-
-    private StringBuilder textoDaListagem;
-    private Hotel[] listadeHotel;
-
-    private Apartamento[] listadeApartamento;
-    private Hostel[] listadeHostel;
-    private HotelResort[] listadeHotelResort;
-    private TextArea listagemAcomodacao;
-    private Button botaoHotel;
-    private Button botaoHostel;
-    private Button botaoApartamento;
-    private Button normalHotelBotao;
-    private Button resortHotelBotao;
-    private ButtonBar barraBotoes;
-    private Button criarAcomodacao;
-
-    private TextField nomeAcomodacao;
-
-    private TextField enderecoAcomodacao;
-
-    private ChoiceBox<Integer> classificacaoChoice;
-
-    private TextField precoAcomodacao;
-
-    private TextField comodidadeInsert;
-
-    private Button submeterComodidade;
-
-    private Button submeterAcomodacao;
-
-    private ChoiceBox<String> tipoDeAcomodacao;
-
-    public TextField nQuartosDisponiveisInsert;
-    public MenuButton nEstrelasInsert;
-    public Button submeterHotel;
-    public TextField nQuartosInsert;
 
     public String[] listaDeComodidades;
+
+    public String[] listaDeAtividades;
 
     public ListView<Acomodacao> listagemAcomodacaoGlobal;
 
         public void initialize(ListView<Acomodacao> listagemAcomodacao, Button botaoHotel, Button botaoHostel, Button botaoApartamento, Button normalHotelBotao, Button resortHotelBotao, Button criarAcomodacao, ButtonBar barraBotoes,Button remover){
             listagemAcomodacaoGlobal = listagemAcomodacao;
-            acomodacao = new Acomodacao();
             listaDeComodidades = new String[0];
-            hotel = new Hotel();
-            hostel = new Hostel();
-            apartamento = new Apartamento();
-            hotelResort = new HotelResort();
-            textoDaListagem = new StringBuilder();
+            listaDeAtividades = new String[0];
             ObservableList<Acomodacao> acomodacoes = FXCollections.observableArrayList();
             ObservableList<Acomodacao> apartmentos = FXCollections.observableArrayList();
             ObservableList<Acomodacao> hoteis = FXCollections.observableArrayList();
@@ -332,10 +280,29 @@ public class main {
         }
 
     }
+    public void addAtividade(String atividade) {
+        // Create a new array with increased size
+        if(listaDeAtividades != null){
+            String[] newArray = new String[listaDeAtividades.length + 1];
+
+            // Copy existing elements to the new array
+            System.arraycopy(listaDeAtividades, 0, newArray, 0, listaDeAtividades.length);
+
+            // Add the new value to the end of the new array
+            newArray[newArray.length - 1] = atividade;
+
+            // Update the reference to the new array
+            listaDeAtividades = newArray;
+        }else{
+            listaDeAtividades = new String[1];
+            listaDeAtividades[0] = atividade;
+        }
+
+    }
 
 
     public void initializeCriarAcomodacao(TextField nomeAcomodacao, TextField enderecoAcomodacao, ChoiceBox<Integer> classificacaoChoice, TextField precoAcomodacao, ChoiceBox<String> comodidadeInsert, Button submeterComodidade, Button submeterAcomodacao, ChoiceBox<String> tipoDeAcomodacao, TextArea comodidadeList){
-            acomodacao = new Acomodacao();
+            Acomodacao acomodacao = new Acomodacao();
             StringBuilder listaComodidades = new StringBuilder();
             Acomodacao novaAcomodacao = new Acomodacao();
 
@@ -389,7 +356,7 @@ public class main {
                         Node node = (Node) actionEvent.getSource();
                         Stage stage = (Stage) node.getScene().getWindow();
                         Hotel novoHotel = new Hotel(novaAcomodacao);
-                        hotelResort = new HotelResort(novaAcomodacao, novoHotel);
+                       HotelResort hotelResort = new HotelResort(novaAcomodacao, novoHotel);
                         try {
                             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/projetolpp/CriarHotelResort.fxml"));
                             stage.setUserData(novaAcomodacao);
@@ -402,7 +369,7 @@ public class main {
                         }
                     }
                     if(Objects.equals(tipoDeAcomodacao.getValue(), "Apartamento")){
-                        apartamento = new Apartamento(novaAcomodacao);
+                       Apartamento apartamento = new Apartamento(novaAcomodacao);
                         try {
                             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/projetolpp/CriarApartamento.fxml"));
                             Node node = (Node) actionEvent.getSource();
@@ -417,7 +384,7 @@ public class main {
                         }
                     }
                     if(Objects.equals(tipoDeAcomodacao.getValue(), "Hostel")){
-                        hostel = new Hostel(novaAcomodacao);
+                      Hostel hostel = new Hostel(novaAcomodacao);
                         try {
                             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/projetolpp/CriarHostel.fxml"));
                             Node node = (Node) actionEvent.getSource();
@@ -477,115 +444,44 @@ public class main {
         });
     }
 
-    public StringBuilder getTextoDaListagem() {
-        return textoDaListagem;
+
+    public void initializeCriarHotelResort(TextField listaAtividade, Button adicionarAtividade, ChoiceBox<String> insertAtividades, Button botao){
+        botao.setOnAction(new EventHandler<ActionEvent>(){
+            @Override
+            public void handle(ActionEvent actionEvent) {
+
+                Node node = (Node) actionEvent.getSource();
+                Stage stage = (Stage) node.getScene().getWindow();
+                Acomodacao u = (Acomodacao) stage.getUserData();
+                Hostel novoHostel = new Hostel(u);
+                System.out.println(novoHostel.getPrecoNoite());
+
+
+                novoHostel.store();
+                novoHostel.updateAcomodacaoSubclasse("hostel",u.getId(),novoHostel.getId());
+
+                stage.close();
+            }
+        });
+
+        adicionarAtividade.setOnAction(new EventHandler<ActionEvent>(){
+            @Override
+            public void handle(ActionEvent actionEvent) {
+
+                Node node = (Node) actionEvent.getSource();
+                Stage stage = (Stage) node.getScene().getWindow();
+                Acomodacao u = (Acomodacao) stage.getUserData();
+                Hostel novoHostel = new Hostel(u);
+                System.out.println(novoHostel.getPrecoNoite());
+
+
+                novoHostel.store();
+                novoHostel.updateAcomodacaoSubclasse("hostel",u.getId(),novoHostel.getId());
+
+                stage.close();
+            }
+        });
     }
 
-    public void setTextoDaListagem(StringBuilder textoDaListagem) {
-        this.textoDaListagem = textoDaListagem;
-    }
 
-    public Hotel[] getListadeHotel() {
-        return listadeHotel;
-    }
-
-    public void setListadeHotel(Hotel[] listadeHotel) {
-        this.listadeHotel = listadeHotel;
-    }
-
-    public Apartamento[] getListadeApartamento() {
-        return listadeApartamento;
-    }
-
-    public void setListadeApartamento(Apartamento[] listadeApartamento) {
-        this.listadeApartamento = listadeApartamento;
-    }
-
-    public Hostel[] getListadeHostel() {
-        return listadeHostel;
-    }
-
-    public void setListadeHostel(Hostel[] listadeHostel) {
-        this.listadeHostel = listadeHostel;
-    }
-
-    public HotelResort[] getListadeHotelResort() {
-        return listadeHotelResort;
-    }
-
-    public void setListadeHotelResort(HotelResort[] listadeHotelResort) {
-        this.listadeHotelResort = listadeHotelResort;
-    }
-
-    public TextArea getListagemAcomodacao() {
-        return listagemAcomodacao;
-    }
-
-    public void setListagemAcomodacao(TextArea listagemAcomodacao) {
-        this.listagemAcomodacao = listagemAcomodacao;
-    }
-
-    public Button getBotaoHotel() {
-        return botaoHotel;
-    }
-
-    public void setBotaoHotel(Button botaoHotel) {
-        this.botaoHotel = botaoHotel;
-    }
-
-    public Button getBotaoHostel() {
-        return botaoHostel;
-    }
-
-    public void setBotaoHostel(Button botaoHostel) {
-        this.botaoHostel = botaoHostel;
-    }
-
-    public Button getBotaoApartamento() {
-        return botaoApartamento;
-    }
-
-    public void setBotaoApartamento(Button botaoApartamento) {
-        this.botaoApartamento = botaoApartamento;
-    }
-
-    public Button getNormalHotelBotao() {
-        return normalHotelBotao;
-    }
-
-    public void setNormalHotelBotao(Button normalHotelBotao) {
-        this.normalHotelBotao = normalHotelBotao;
-    }
-
-    public Button getResortHotelBotao() {
-        return resortHotelBotao;
-    }
-
-    public void setResortHotelBotao(Button resortHotelBotao) {
-        this.resortHotelBotao = resortHotelBotao;
-    }
-
-    public ButtonBar getBarraBotoes() {
-        return barraBotoes;
-    }
-
-    public void setBarraBotoes(ButtonBar barraBotoes) {
-        this.barraBotoes = barraBotoes;
-    }
-
-    public Button getCriarAcomodacao() {
-        return criarAcomodacao;
-    }
-
-    public void setCriarAcomodacao(Button criarAcomodacao) {
-        this.criarAcomodacao = criarAcomodacao;
-    }
-
-    public ListView<Acomodacao> getListagemAcomodacaoGlobal() {
-        return listagemAcomodacaoGlobal;
-    }
-
-    public void setListagemAcomodacaoGlobal(ListView<Acomodacao> listagemAcomodacaoGlobal) {
-        this.listagemAcomodacaoGlobal = listagemAcomodacaoGlobal;
-    }
 }

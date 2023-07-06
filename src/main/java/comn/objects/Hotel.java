@@ -104,7 +104,7 @@ Método adicionarComodidade() para adicionar comodidades ao hotel.
     }
 
     public void store() {
-        
+
         String[] fields = {"id", "categoria", "numeroEstrelas", "acessibilidade"};
 
         if (this.id == null) {

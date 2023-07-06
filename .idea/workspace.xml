@@ -6,14 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="ce383701-ca86-4590-a462-cda330fe785e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/projetolpp/Controlador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/projetolpp/Controlador.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/projetolpp/ControladorHotelResort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/projetolpp/ControladorHotelResort.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/comn/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comn/main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/comn/objects/Acomodacao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comn/objects/Acomodacao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/comn/objects/Apartamento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comn/objects/Apartamento.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/comn/objects/Comodidade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comn/objects/Comodidade.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/comn/objects/Hostel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comn/objects/Hostel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/comn/objects/Hotel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comn/objects/Hotel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/projetolpp/CriarHotelResort.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/projetolpp/CriarHotelResort.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -134,7 +130,7 @@
       <workItem from="1688555426431" duration="9499000" />
       <workItem from="1688576178484" duration="10997000" />
       <workItem from="1688641703352" duration="1344000" />
-      <workItem from="1688646822366" duration="11218000" />
+      <workItem from="1688646822366" duration="13255000" />
     </task>
     <servers />
   </component>
