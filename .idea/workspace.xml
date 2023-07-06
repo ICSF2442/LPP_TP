@@ -7,12 +7,9 @@
     <list default="true" id="ce383701-ca86-4590-a462-cda330fe785e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/comn/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comn/main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/comn/objects/Apartamento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comn/objects/Apartamento.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/comn/objects/Atividade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comn/objects/Atividade.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/comn/objects/Comodidade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comn/objects/Comodidade.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/comn/objects/Hostel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comn/objects/Hostel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/comn/objects/Hotel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comn/objects/Hotel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/comn/objects/HotelResort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comn/objects/HotelResort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/projetolpp/Reserva.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/projetolpp/Reserva.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,20 +42,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/ICSF/Documents/projetoLPP/src/main/java/comn&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/ICSF2/Documents/LPP_TP",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\ICSF\Documents\projetoLPP\src\main\java\comn" />
@@ -70,7 +70,7 @@
   <component name="RunManager" selected="Application.com.example.projetolpp.Aplicacao">
     <configuration name="com.example.projetolpp.Aplicacao" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.projetolpp.Aplicacao" />
-      <module name="projetoLPP" />
+      <module name="LPP_TP" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.example.projetolpp.*" />
@@ -130,6 +130,7 @@
       <workItem from="1688555426431" duration="9499000" />
       <workItem from="1688576178484" duration="10997000" />
       <workItem from="1688641703352" duration="1344000" />
+      <workItem from="1688646822366" duration="2527000" />
     </task>
     <servers />
   </component>
@@ -147,6 +148,55 @@
           <properties class="java.lang.NullPointerException" package="java.lang" />
           <option name="timeStamp" value="2" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/comn/main.java</url>
+          <line>135</line>
+          <properties method="handle">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/comn/main.java</url>
+          <line>136</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/comn/main.java</url>
+          <line>137</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/comn/main.java</url>
+          <line>141</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/comn/main.java</url>
+          <line>138</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/comn/main.java</url>
+          <line>144</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/comn/main.java</url>
+          <line>145</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/comn/main.java</url>
+          <line>146</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/comn/main.java</url>
+          <line>147</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

@@ -1,6 +1,5 @@
 package comn.objects;
 
-import com.example.projetolpp.Controlador;
 import comn.functions.Database;
 import comn.interfaces.slogan;
 

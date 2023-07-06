@@ -69,7 +69,10 @@ public class main {
 
     public String[] listaDeComodidades;
 
+    public ListView<Acomodacao> listagemAcomodacaoGlobal;
+
         public void initialize(ListView<Acomodacao> listagemAcomodacao, Button botaoHotel, Button botaoHostel, Button botaoApartamento, Button normalHotelBotao, Button resortHotelBotao, Button criarAcomodacao, ButtonBar barraBotoes){
+            listagemAcomodacaoGlobal = listagemAcomodacao;
             acomodacao = new Acomodacao();
             listaDeComodidades = new String[0];
             hotel = new Hotel();
@@ -85,19 +88,14 @@ public class main {
             normalHotelBotao.setVisible(false);
             resortHotelBotao.setVisible(false);
             barraBotoes.setVisible(false);
-            Acomodacao[] ret = Acomodacao.search(null,null,null,null, null);
-            if(ret != null){
-                acomodacoes.addAll(Arrays.asList(ret));
-                listagemAcomodacao.setItems(acomodacoes);
-                listagemAcomodacao.getItems();
-            }
+            
 
 
 
 
             //barraBotoes.setVisible(false);
-            //listagemAcomodacao.setText("AAAAAAA");
-            listagemAcomodacao.setCellFactory(param -> new ListCell<Acomodacao>() {
+            //listagemAcomodacaoGlobal.setText("AAAAAAA");
+            listagemAcomodacaoGlobal.setCellFactory(param -> new ListCell<Acomodacao>() {
                 @Override
                 protected void updateItem(Acomodacao item, boolean empty) {
                     super.updateItem(item, empty);
@@ -139,10 +137,15 @@ public class main {
                     normalHotelBotao.setVisible(true);
                     resortHotelBotao.setVisible(true);
                    Hotel[] hoteis1 = Hotel.search(null,null,null,null);
+                    listagemAcomodacaoGlobal.getItems().clear();
+                    hoteis.clear();
                    if(hoteis1 != null){
+
                        hoteis.addAll(Arrays.asList(hoteis1));
-                       listagemAcomodacao.getItems().clear();
-                       listagemAcomodacao.setItems(hoteis);
+                       if (!hoteis.isEmpty()) {
+
+                           listagemAcomodacaoGlobal.setItems(hoteis);
+                       }
                    }
 
                 }
@@ -153,29 +156,39 @@ public class main {
                     normalHotelBotao.setVisible(false);
                     resortHotelBotao.setVisible(false);
                     Hostel[] hosteis1 = Hostel.search(null,null,null,null);
+                    listagemAcomodacaoGlobal.getItems().clear();
+                    hosteis.clear();
                     if(hosteis1 != null){
+
                         hosteis.addAll(Arrays.asList(hosteis1));
-                        listagemAcomodacao.getItems().clear();
-                        listagemAcomodacao.setItems(hosteis);
+                        if (!hosteis.isEmpty()) {
+                            listagemAcomodacaoGlobal.getItems().clear();
+                            listagemAcomodacaoGlobal.setItems(hosteis);
+                        }
                     }
 
                 }
 
             });
-            botaoApartamento.setOnAction(new EventHandler<ActionEvent>(){
-                @Override
-                public void handle(ActionEvent actionEvent) {
-                    normalHotelBotao.setVisible(false);
-                    resortHotelBotao.setVisible(false);
-                    Apartamento[] apartamentos1 = Apartamento.search(null,null,null,null,null,null);
-                    if(apartamentos1 != null){
-                        apartmentos.addAll(Arrays.asList(apartamentos1));
-                        listagemAcomodacao.getItems().clear();
-                        listagemAcomodacao.setItems(apartmentos);
-                    }
+                botaoApartamento.setOnAction(new EventHandler<ActionEvent>(){
+                    @Override
+                    public void handle(ActionEvent actionEvent) {
+                        normalHotelBotao.setVisible(false);
+                        resortHotelBotao.setVisible(false);
+                        Apartamento[] apartamentos1 = Apartamento.search(null,null,null,null,null,null);
+                        listagemAcomodacaoGlobal.getItems().clear();
+                        apartmentos.clear();
+                        if(apartamentos1 != null){
 
-                }
-            });
+                            apartmentos.addAll(Arrays.asList(apartamentos1));
+                            if (!apartmentos.isEmpty()) {
+                                listagemAcomodacaoGlobal.getItems().clear();
+                                listagemAcomodacaoGlobal.setItems(apartmentos);
+                            }
+                        }
+
+                    }
+                });
 
             criarAcomodacao.setOnAction(new EventHandler<ActionEvent>(){
                 @Override
@@ -198,11 +211,14 @@ public class main {
                 public void handle(ActionEvent actionEvent) {
                     normalHotelBotao.setVisible(true);
                     resortHotelBotao.setVisible(true);
-                    HotelResort[] hoteisResort1 = (HotelResort[]) HotelResort.search(null,null,null,null);
+                    HotelResort[] hoteisResort1 = HotelResort.search(null);
+                    listagemAcomodacaoGlobal.getItems().clear();
+                    resortHoteis.clear();
                     if(hoteisResort1 != null){
+
                         resortHoteis.addAll(Arrays.asList(hoteisResort1));
-                        listagemAcomodacao.getItems().clear();
-                        listagemAcomodacao.setItems(resortHoteis);
+                        listagemAcomodacaoGlobal.getItems().clear();
+                        listagemAcomodacaoGlobal.setItems(resortHoteis);
                     }
 
                 }
@@ -215,8 +231,10 @@ public class main {
                     Hotel[] hoteis1 = Hotel.search(null,null,null,null);
                     if(hoteis1 != null){
                         hoteis.addAll(Arrays.asList(hoteis1));
-                        listagemAcomodacao.getItems().clear();
-                        listagemAcomodacao.setItems(hoteis);
+                        if (!hoteis.isEmpty()) {
+
+                            listagemAcomodacaoGlobal.setItems(hoteis);
+                        }
                     }
                 }
             });
@@ -273,10 +291,13 @@ public class main {
                     novaAcomodacao.setPrecoNoite(Double.parseDouble(precoAcomodacao.getText()));
                     novaAcomodacao.setEndereco(enderecoAcomodacao.getText());
                     novaAcomodacao.store();
-                    for (String listaDeComodidade : listaDeComodidades) {
-                        Comodidade[] ret = Comodidade.search(null,listaDeComodidade);
-                        ret[0].addComodidadeAcomodacao(ret[0].getId(),novaAcomodacao.getId());
+                    if(listaDeComodidades != null){
+                        for (String listaDeComodidade : listaDeComodidades) {
+                            Comodidade[] ret = Comodidade.search(null,listaDeComodidade);
+                            ret[0].addComodidadeAcomodacao(ret[0].getId(),novaAcomodacao.getId());
+                        }
                     }
+
                     if(Objects.equals(tipoDeAcomodacao.getValue(), "Hotel")){
                         Node node = (Node) actionEvent.getSource();
                         Stage stage = (Stage) node.getScene().getWindow();
@@ -343,6 +364,8 @@ public class main {
         });
     }
 
+
+
     public void initializeCriarHotel(CheckBox acessibilidadeCheck, ChoiceBox<Integer> nEstrelasInsert, Button submeterHotel, TextField categoriaText){
         submeterHotel.setOnAction(new EventHandler<ActionEvent>(){
             @Override
@@ -356,6 +379,8 @@ public class main {
                 novoHotel.setNumeroEstrelas(Integer.parseInt(String.valueOf(nEstrelasInsert.getValue())));
                 novoHotel.store();
                 novoHotel.updateAcomodacaoSubclasse("hotel",u.getId(),novoHotel.getId());
+
+                stage.close();
             }
         });
     }
@@ -374,6 +399,8 @@ public class main {
                 if(quartos.isSelected()) novoHostel.setQuartosCompartilhados(1);
                 novoHostel.store();
                 novoHostel.updateAcomodacaoSubclasse("hostel",u.getId(),novoHostel.getId());
+
+                stage.close();
             }
         });
     }
@@ -480,5 +507,13 @@ public class main {
 
     public void setCriarAcomodacao(Button criarAcomodacao) {
         this.criarAcomodacao = criarAcomodacao;
+    }
+
+    public ListView<Acomodacao> getListagemAcomodacaoGlobal() {
+        return listagemAcomodacaoGlobal;
+    }
+
+    public void setListagemAcomodacaoGlobal(ListView<Acomodacao> listagemAcomodacaoGlobal) {
+        this.listagemAcomodacaoGlobal = listagemAcomodacaoGlobal;
     }
 }

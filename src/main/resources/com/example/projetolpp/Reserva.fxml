@@ -24,5 +24,4 @@
     <Button id="resortHotelbotao" fx:id="resortHotelbotao" layoutX="136.0" layoutY="104.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="56.0" text="Resort" />
    <ListView id="listagemAcomodacao" fx:id="listagemAcomodacao" layoutX="131.0" layoutY="155.0" prefHeight="347.0" prefWidth="749.0" />
    <Button id="remover" fx:id="remover" layoutX="164.0" layoutY="527.0" mnemonicParsing="false" onMouseClicked="#clicarAcomodacao" prefHeight="78.0" prefWidth="107.0" text="Remover" />
-   <Button id="editar" fx:id="editar" layoutX="297.0" layoutY="527.0" mnemonicParsing="false" onMouseClicked="#clicarAcomodacao" prefHeight="78.0" prefWidth="107.0" text="Editar" />
 </Pane>

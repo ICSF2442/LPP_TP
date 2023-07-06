@@ -211,6 +211,14 @@ public class HotelResort extends Hotel implements slogan {
     }
     //utilização da classe abstrata
 
+    public int getHotel_fk() {
+        return hotel_fk;
+    }
+
+    public void setHotel_fk(int hotel_fk) {
+        this.hotel_fk = hotel_fk;
+    }
+
     @Override
     public String slogan(){
         return "Bem vindo á reserva de HotelResort!";
