@@ -264,8 +264,8 @@ public class Apartamento extends Acomodacao implements slogan {
         System.out.print("Cozinha incluída? ");
         System.out.print(getCozinha() == 1 ? "Sim" : "Não");
     }
-    public Apartamento(int idAcomodacao, String nome, String endereco, int classificacao, double precoNoite, int nQuartos, double areaTotal, int nCasaDeBanhos, int internet, int cozinha) {
-        super(idAcomodacao, nome, endereco, classificacao, precoNoite);
+    public Apartamento(int idAcomodacao, String nome, String endereco,int reserva, int classificacao, double precoNoite, int nQuartos, double areaTotal, int nCasaDeBanhos, int internet, int cozinha) {
+        super(idAcomodacao, nome, endereco, classificacao, precoNoite, reserva);
         this.nQuartos = nQuartos;
         this.areaTotal = areaTotal;
         this.nCasaDeBanhos = nCasaDeBanhos;

@@ -13,6 +13,7 @@ import java.io.IOException;
 
 public class Controlador {
 
+    public Button remover;
     @FXML
     private ButtonBar barraBotoes;
     @FXML
@@ -40,7 +41,7 @@ public class Controlador {
     public void initialize() throws IOException { //Inicialização do código para fazer a analíse do texto exportando os objetos.
         comn.main main = new main();
 
-        main.initialize(listagemAcomodacao, botaoHotel, botaoHostel,botaoApartamento,normalHotelBotao,resortHotelbotao,criarAcomodacao,barraBotoes);
+        main.initialize(listagemAcomodacao, botaoHotel, botaoHostel,botaoApartamento,normalHotelBotao,resortHotelbotao,criarAcomodacao,barraBotoes,remover);
     }
 
     public void clicarAcomodacao(){

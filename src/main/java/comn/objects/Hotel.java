@@ -71,8 +71,8 @@ Método adicionarComodidade() para adicionar comodidades ao hotel.
         return acomodacaoId;
     }
 
-    public Hotel(int idAcomodacao, String nome, String endereco, int classificacao, double precoNoite, int acessibilidade, String categoria, int numeroEstrelas) {
-        super(idAcomodacao, nome, endereco, classificacao, precoNoite);
+    public Hotel(int idAcomodacao, String nome, String endereco, int classificacao, double precoNoite,int reserva, int acessibilidade, String categoria, int numeroEstrelas) {
+        super(idAcomodacao, nome, endereco, classificacao, precoNoite,reserva);
         this.categoria = categoria;
         this.acessibilidade = acessibilidade;
         this.numeroEstrelas = numeroEstrelas;
@@ -104,6 +104,7 @@ Método adicionarComodidade() para adicionar comodidades ao hotel.
     }
 
     public void store() {
+        
         String[] fields = {"id", "categoria", "numeroEstrelas", "acessibilidade"};
 
         if (this.id == null) {
@@ -128,6 +129,7 @@ Método adicionarComodidade() para adicionar comodidades ao hotel.
                 e.printStackTrace();
             }
         } else {
+            super.store();
             StringBuilder values = new StringBuilder();
             String sql = "UPDATE hotel SET ";
             for (String field : fields) {
@@ -161,7 +163,7 @@ Método adicionarComodidade() para adicionar comodidades ao hotel.
         }
     }
 
-    public static Hotel[] search(Integer id, String categoria, Integer numeroEstrelas, Boolean acessibilidade) {
+    public static Hotel[] search(Integer id, String categoria, Integer numeroEstrelas, Boolean acessibilidade,Integer acomodacao_fk) {
         String sql = "SELECT id FROM hotel WHERE 1=1";
 
         if (id != null) {
@@ -175,6 +177,9 @@ Método adicionarComodidade() para adicionar comodidades ao hotel.
         }
         if (acessibilidade != null) {
             sql += " AND (acessibilidade = " + (acessibilidade ? "1" : "0") + ")";
+        }
+        if (acomodacao_fk != null) {
+            sql += " AND (acomodacao_fk = '" + acomodacao_fk + "')";
         }
 
         Hotel[] ret = null;
@@ -207,7 +212,7 @@ Método adicionarComodidade() para adicionar comodidades ao hotel.
         return ret;
     }
 
-    public static int find(Integer id, String categoria, Integer numeroEstrelas, Boolean acessibilidade) {
+    public static int find(Integer id, String categoria, Integer numeroEstrelas, Boolean acessibilidade, Integer acomodacao_fk) {
         String sql = "SELECT id FROM hotel WHERE 1=1";
 
         if (id != null) {
@@ -221,6 +226,9 @@ Método adicionarComodidade() para adicionar comodidades ao hotel.
         }
         if (acessibilidade != null) {
             sql += " AND (acessibilidade = " + (acessibilidade ? "1" : "0") + ")";
+        }
+        if (acomodacao_fk != null) {
+            sql += " AND (acomodacao_fk = " + (acomodacao_fk)+")";
         }
 
         try {

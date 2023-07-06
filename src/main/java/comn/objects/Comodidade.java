@@ -112,6 +112,43 @@ public class Comodidade {
         }
     }
 
+    public static Comodidade[] searchAllComodidades(Integer idAcomodacao) {
+        String sql = "SELECT * FROM comodidade_acomodacao WHERE 1=1";
+
+        if (idAcomodacao != null) {
+            sql += " AND acomodacao_FK = " + idAcomodacao;
+        }
+
+        Comodidade[] result = null;
+
+        try {
+            Statement statement = Database.getConnection().createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            resultSet.last();
+            int rowCount = resultSet.getRow();
+            resultSet.beforeFirst();
+
+            if (rowCount > 0) {
+                result = new Comodidade[rowCount];
+                int index = 0;
+
+                while (resultSet.next()) {
+                    int comodidadeId = resultSet.getInt("comodidade_FK");
+                    result[index] = new Comodidade(comodidadeId);
+                    index++;
+                }
+            }
+
+            resultSet.close();
+            statement.close();
+        } catch (SQLException | IOException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
     public static Comodidade[] search(Integer id, String nome) {
         String sql = "SELECT id FROM comodidade WHERE 1=1";
 

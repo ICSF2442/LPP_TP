@@ -153,7 +153,7 @@ Café da manhã: Indica se o hostel oferece café da manhã incluso na diária.
         }
     }
 
-    public static Hostel[] search(Integer id, Integer casaDeBanhoCompartilhada, Integer internet, Integer quartosCompartilhados) {
+    public static Hostel[] search(Integer id, Integer casaDeBanhoCompartilhada, Integer internet, Integer quartosCompartilhados, Integer acomodacao_fk) {
         String sql = "SELECT id FROM hostel WHERE 1=1";
 
         if (id != null) {
@@ -169,6 +169,9 @@ Café da manhã: Indica se o hostel oferece café da manhã incluso na diária.
             sql += " AND (quartosCompartilhados = " + quartosCompartilhados + ")";
         }
 
+        if (acomodacao_fk != null) {
+            sql += " AND (acomodacao_fk = " + acomodacao_fk + ")";
+        }
         Hostel[] ret = null;
 
         try {
@@ -213,7 +216,7 @@ Café da manhã: Indica se o hostel oferece café da manhã incluso na diária.
         }
     }
 
-    public static int find(Integer id, Integer casaDeBanhoCompartilhada, Integer internet, Integer quartosCompartilhados) {
+    public static int find(Integer id, Integer casaDeBanhoCompartilhada, Integer internet, Integer quartosCompartilhados, Integer acomodacao_fk) {
         String sql = "SELECT id FROM hostel WHERE 1=1";
 
         if (id != null) {
@@ -227,6 +230,9 @@ Café da manhã: Indica se o hostel oferece café da manhã incluso na diária.
         }
         if (quartosCompartilhados != null) {
             sql += " AND (quartosCompartilhados = " + quartosCompartilhados + ")";
+        }
+        if (acomodacao_fk != null) {
+            sql += " AND (acomodacao_fk = " + (acomodacao_fk)+")";
         }
 
         try {

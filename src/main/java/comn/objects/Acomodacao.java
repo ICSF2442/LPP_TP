@@ -15,14 +15,16 @@ public class Acomodacao  {
     private String endereco;
     private int classificacao;
     private double precoNoite;
+    private int reservado;
 
 
-    public Acomodacao(int id, String nome, String endereco, int classificacao, double precoNoite) {
+    public Acomodacao(int id, String nome, String endereco, int classificacao, double precoNoite, int reserva) {
         this.id = id;
         this.nome = nome;
         this.endereco = endereco;
         this.classificacao = classificacao;
         this.precoNoite = precoNoite;
+        this.reservado = reserva;
     }
     public Acomodacao(Integer id) throws SQLException, IOException {
         if (id != null && Database.getConnection() != null) {
@@ -36,6 +38,7 @@ public class Acomodacao  {
                     this.endereco = resultSet.getString("endereco");
                     this.classificacao = resultSet.getInt("classificacao");
                     this.precoNoite = resultSet.getDouble("precoNoite");
+                    this.reservado = resultSet.getInt("reservado");
                 }
 
                 resultSet.close();
@@ -51,6 +54,7 @@ public class Acomodacao  {
         this.endereco = acomodacao.getEndereco();
         this.classificacao = acomodacao.getClassificacao();
         this.precoNoite = acomodacao.getPrecoNoite();
+        this.reservado = acomodacao.getReserva();
     }
     public Object[] toArray() {
         Object[] array = new Object[5];
@@ -80,7 +84,7 @@ public class Acomodacao  {
 
 
     public void store() {
-        String[] fields = {"id", "nome", "endereco", "classificacao", "precoNoite"};
+        String[] fields = {"id", "nome", "endereco", "classificacao", "precoNoite","reservado"};
 
         if (this.id == null) {
             this.id = Database.getNextIncrement("acomodacao");
@@ -104,6 +108,7 @@ public class Acomodacao  {
                 e.printStackTrace();
             }
         } else {
+
             StringBuilder values = new StringBuilder();
             String sql = "UPDATE acomodacao SET ";
             for (String field : fields) {
@@ -236,6 +241,7 @@ public class Acomodacao  {
             case "endereco" -> this.endereco;
             case "classificacao" -> this.classificacao;
             case "precoNoite" -> this.precoNoite;
+            case "reservado"->this.reservado;
             default -> null;
         };
     }
@@ -278,14 +284,31 @@ public class Acomodacao  {
         return super.clone();
     }
 
+    public String getComodidades(){
+        StringBuilder comodidades = new StringBuilder();
+        Comodidade[] allComodidades = Comodidade.searchAllComodidades(this.id);
+        if(allComodidades != null) {
+            for (Comodidade comodidadeA : allComodidades) {
+                comodidades.append(comodidadeA.getNome());
+                comodidades.append(", ");
+            }
+        }
+        return String.valueOf(comodidades);
+    }
+
+
+
     @Override
     public String toString() {
+        String reserva = (this.getReserva() == 1) ? "Sim" : "Não";
         return
-                "Nome: " + nome + '\'' + "\n"+
-                "Endereco: " + endereco + '\'' + "\n"+
+                "Nome: " + nome +   "\n"+
+                "Endereco: " + endereco +  "\n"+
                 "Classificação: " + classificacao + "\n"+
                 "PrecoNoite: " + precoNoite + "\n"+
-                "Descrição: " + descricao() + '\'' + "\n"+
+                        "Descrição: " + descricao() +  "\n"+
+                        "Reservado? "+  reserva  +   "\n"+
+                        "Comodidades: "+getComodidades()+   "\n"+
                 "\n";}
 
 
@@ -329,5 +352,13 @@ public class Acomodacao  {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public int getReserva() {
+        return reservado;
+    }
+
+    public void setReserva(int reserva) {
+        this.reservado = reserva;
     }
 }

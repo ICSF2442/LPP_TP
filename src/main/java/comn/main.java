@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 
+import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -71,7 +72,7 @@ public class main {
 
     public ListView<Acomodacao> listagemAcomodacaoGlobal;
 
-        public void initialize(ListView<Acomodacao> listagemAcomodacao, Button botaoHotel, Button botaoHostel, Button botaoApartamento, Button normalHotelBotao, Button resortHotelBotao, Button criarAcomodacao, ButtonBar barraBotoes){
+        public void initialize(ListView<Acomodacao> listagemAcomodacao, Button botaoHotel, Button botaoHostel, Button botaoApartamento, Button normalHotelBotao, Button resortHotelBotao, Button criarAcomodacao, ButtonBar barraBotoes,Button remover){
             listagemAcomodacaoGlobal = listagemAcomodacao;
             acomodacao = new Acomodacao();
             listaDeComodidades = new String[0];
@@ -88,9 +89,80 @@ public class main {
             normalHotelBotao.setVisible(false);
             resortHotelBotao.setVisible(false);
             barraBotoes.setVisible(false);
-            
+
+            remover.setOnAction(new EventHandler<ActionEvent>() {
+
+                @Override
+                public void handle(ActionEvent actionEvent) {
+                    Acomodacao selectedItem = listagemAcomodacaoGlobal.getSelectionModel().getSelectedItem();
+                    if (selectedItem != null) {
+                        if (Hotel.find(null, null, null, null, selectedItem.getId()) == 1) {
+                            Hotel[] ret = Hotel.search(null, null, null, null, selectedItem.getId());
+                            selectedItem.remove();
+                            ret[0].remove();
+                            Hotel[] hoteis1 = Hotel.search((Integer) null, (String) null, (Integer) null,null,null);
+                            listagemAcomodacaoGlobal.getItems().clear();
+                            hoteis.clear();
+                            if(hoteis1 != null){
+
+                                hoteis.addAll(Arrays.asList(hoteis1));
+                                if (!hoteis.isEmpty()) {
+
+                                    listagemAcomodacaoGlobal.setItems(hoteis);
+                                }
+                            }
+                        }
+                        if (Hostel.find(null, null, null, null, selectedItem.getId()) == 1) {
+                            Hostel[] ret = Hostel.search(null, null, null, null, selectedItem.getId());
+                            selectedItem.remove();
+                            ret[0].remove();
+                            Hostel[] hosteis1 = Hostel.search((Integer) null, (Integer) null,null,null,null);
+                            listagemAcomodacaoGlobal.getItems().clear();
+                            hosteis.clear();
+                            if(hosteis1 != null){
+
+                                hosteis.addAll(Arrays.asList(hosteis1));
+                                if (!hosteis.isEmpty()) {
+                                    listagemAcomodacaoGlobal.getItems().clear();
+                                    listagemAcomodacaoGlobal.setItems(hosteis);
+                                }
+                            }
+                        }
+
+                    }
+
+                }
+
+            });
 
 
+            listagemAcomodacaoGlobal.setOnMouseClicked(event -> {
+                if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 2) {
+                    // Get the selected item
+                    Acomodacao selectedItem = listagemAcomodacaoGlobal.getSelectionModel().getSelectedItem();
+                    if (selectedItem != null) {
+                        if(selectedItem.getReserva() != 1){
+                            selectedItem.setReserva(1);
+                        }else {
+                            selectedItem.setReserva(0);
+                        }
+
+                        selectedItem.store();
+                        Hotel[] hoteis1 = Hotel.search((Integer) null, (String) null, (Integer) null,null,null);
+                        listagemAcomodacaoGlobal.getItems().clear();
+                        hoteis.clear();
+                        if(hoteis1 != null){
+
+                            hoteis.addAll(Arrays.asList(hoteis1));
+                            if (!hoteis.isEmpty()) {
+
+                                listagemAcomodacaoGlobal.setItems(hoteis);
+                            }
+                        }
+
+                    }
+                }
+            });
 
 
             //barraBotoes.setVisible(false);
@@ -136,7 +208,7 @@ public class main {
                 public void handle(ActionEvent actionEvent) {
                     normalHotelBotao.setVisible(true);
                     resortHotelBotao.setVisible(true);
-                   Hotel[] hoteis1 = Hotel.search(null,null,null,null);
+                   Hotel[] hoteis1 = Hotel.search((Integer) null, (String) null, (Integer) null,null,null);
                     listagemAcomodacaoGlobal.getItems().clear();
                     hoteis.clear();
                    if(hoteis1 != null){
@@ -155,7 +227,7 @@ public class main {
                 public void handle(ActionEvent actionEvent) {
                     normalHotelBotao.setVisible(false);
                     resortHotelBotao.setVisible(false);
-                    Hostel[] hosteis1 = Hostel.search(null,null,null,null);
+                    Hostel[] hosteis1 = Hostel.search((Integer) null, (Integer) null,null,null,null);
                     listagemAcomodacaoGlobal.getItems().clear();
                     hosteis.clear();
                     if(hosteis1 != null){
@@ -228,7 +300,7 @@ public class main {
                 public void handle(ActionEvent actionEvent) {
                     normalHotelBotao.setVisible(true);
                     resortHotelBotao.setVisible(true);
-                    Hotel[] hoteis1 = Hotel.search(null,null,null,null);
+                    Hotel[] hoteis1 = Hotel.search((Integer) null, (String) null, (Integer) null,null,null);
                     if(hoteis1 != null){
                         hoteis.addAll(Arrays.asList(hoteis1));
                         if (!hoteis.isEmpty()) {
